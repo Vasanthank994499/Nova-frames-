@@ -27,8 +27,15 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-          <Link href="/" className="z-50 flex items-center text-lg sm:text-xl font-bold text-surface tracking-tight">
-            Nova<span className="text-accent mx-0.5 mb-1 text-2xl leading-[0]">.</span>Frames
+          <Link href="/" className="z-50 flex items-center gap-2.5 text-lg sm:text-xl font-bold text-surface tracking-tight group">
+            <img 
+              src="/logo.png" 
+              alt="Nova Frames Logo" 
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shadow-sm group-hover:scale-105 transition-transform duration-300"
+            />
+            <span>
+              Nova<span className="text-accent mx-0.5 mb-1 text-2xl leading-[0]">.</span>Frames
+            </span>
           </Link>
 
           <button

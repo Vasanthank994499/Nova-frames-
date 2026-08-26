@@ -11,8 +11,13 @@ export default function Footer() {
           
           {/* Column 1 - Brand */}
           <div>
-            <div className="text-xl font-bold text-txt-primary">
-              Nova Frames<span className="text-accent">.</span>
+            <div className="flex items-center gap-2.5 text-xl font-bold text-txt-primary">
+              <img 
+                src="/logo.png" 
+                alt="Nova Frames Logo" 
+                className="w-8 h-8 rounded-xl object-contain shadow-sm"
+              />
+              <span>Nova Frames<span className="text-accent">.</span></span>
             </div>
             <p className="text-sm text-txt-muted mt-3 sm:mt-4 leading-relaxed">
               Bridging creativity and data to build digital experiences that perform, inspire, and scale.

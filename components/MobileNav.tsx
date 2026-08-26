@@ -55,6 +55,13 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           className="fixed inset-0 z-40 bg-[#0f172a]/95 backdrop-blur-xl flex flex-col justify-between px-6 sm:px-10 py-24 sm:py-28 overflow-y-auto"
         >
           <div className="my-auto w-full">
+            <div className="flex justify-center mb-8">
+              <img 
+                src="/logo.png" 
+                alt="Nova Frames Logo" 
+                className="w-14 h-14 rounded-2xl object-contain shadow-lg border border-white/10"
+              />
+            </div>
             <nav className="flex flex-col space-y-6 sm:space-y-8 items-center text-center w-full">
               {navLinks.map((link) => (
                 <motion.div key={link.name} variants={linkVariants}>

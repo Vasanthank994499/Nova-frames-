@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     "UI/UX",
     "video production",
   ],
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
