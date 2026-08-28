@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import SampleWorks from '@/components/SampleWorks';
 import TeamCarousel from '@/components/TeamCarousel';
 import VideoShowcase from '@/components/VideoShowcase';
 import Metrics from '@/components/Metrics';
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <Hero />
       <Services />
+      <SampleWorks />
       <TeamCarousel />
       <VideoShowcase />
       <Metrics />

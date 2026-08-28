@@ -11,7 +11,7 @@ interface MobileNavProps {
 
 const navLinks = [
   { name: 'Services', href: '/#services' },
-  { name: 'Featured Reels & Work', href: '/#video-showcase' },
+  { name: 'Sample Works & Reels', href: '/#sample-works' },
   { name: 'Clients & Case Studies', href: '/clients' },
   { name: 'Our Team & Leadership', href: '/team' },
   { name: 'Contact / Book Inquiry', href: '/contact' },
