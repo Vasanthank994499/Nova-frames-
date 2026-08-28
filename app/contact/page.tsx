@@ -157,8 +157,15 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-txt-primary">Office</p>
-                      <p className="text-txt-muted text-xs sm:text-sm mt-0.5 leading-relaxed">42 Skyline Tower, Bandra West, Mumbai 400050</p>
+                      <p className="text-xs sm:text-sm font-semibold text-txt-primary">Office Location</p>
+                      <a 
+                        href="https://maps.app.goo.gl/bT5u4kWdxTYabLfn8?g_st=ac" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-txt-muted hover:text-accent text-xs sm:text-sm mt-0.5 block transition-colors leading-relaxed"
+                      >
+                        Novaframes, Sokkaramman Nagar, Kuruppanaickenpalayam, Tamil Nadu 638301
+                      </a>
                     </div>
                   </div>
                   
