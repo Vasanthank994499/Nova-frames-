@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function WhatsAppFloatingButton() {
   const phoneNumber = '917826069557';
-  const defaultMessage = encodeURIComponent("Hi Nova Frames, I'd like to start a conversation about growing my brand.");
+  const defaultMessage = encodeURIComponent("Hi Nova Frames, Let us connect to discuss growing my brand.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
 
   return (

@@ -89,7 +89,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 onClick={onClose}
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:py-3 rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-lg shadow-accent/30 min-h-[44px]"
               >
-                <span>Start a Conversation</span>
+                <span>Let Us Connect</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>

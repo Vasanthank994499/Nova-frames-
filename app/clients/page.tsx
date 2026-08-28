@@ -172,7 +172,7 @@ export default function ClientsPage() {
               href="/contact"
               className="inline-flex items-center gap-2 mt-6 px-8 py-4 rounded-full bg-accent hover:bg-accent-glow text-white font-semibold text-sm uppercase tracking-wider transition-all"
             >
-              <span>Start a Conversation</span>
+              <span>Let Us Connect</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

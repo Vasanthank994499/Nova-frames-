@@ -82,7 +82,7 @@ export default function Hero() {
             href="/contact"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider min-h-[48px]"
           >
-            <span>Start a Conversation</span>
+            <span>Let Us Connect</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
