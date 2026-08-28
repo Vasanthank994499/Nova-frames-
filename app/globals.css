@@ -17,11 +17,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #94a3b8;
   border-radius: 3px;
 }
 
@@ -51,20 +51,4 @@ body {
 
 .glass-dark {
   @apply bg-dark/80 backdrop-blur-lg border border-white/10;
-}
-
-/* Editorial section label — uppercase accent micro-text */
-.section-label {
-  @apply text-xs sm:text-sm uppercase tracking-[0.2em] text-accent font-semibold font-body;
-}
-
-/* Editorial display heading */
-.editorial-heading {
-  @apply font-display font-bold uppercase leading-[1.05] tracking-tight;
-}
-
-/* Selection color */
-::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #ffffff;
 }
