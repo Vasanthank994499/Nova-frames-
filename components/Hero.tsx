@@ -7,7 +7,7 @@ import Globe from "@/components/Globe";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-dark flex items-center justify-center pt-16">
+    <section className="relative min-h-[100dvh] overflow-hidden bg-dark flex items-center justify-center pt-16">
       {/* Background 3D Wireframe Globe */}
       <div className="absolute inset-0 opacity-85 z-0 pointer-events-none">
         <Globe />
@@ -23,9 +23,9 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-block px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 backdrop-blur-md mb-6 sm:mb-8"
+          className="inline-block px-3.5 py-1.5 sm:px-4 rounded-full border border-accent/30 bg-accent/10 backdrop-blur-md mb-6 sm:mb-8 max-w-full"
         >
-          <span className="text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-accent-light">
+          <span className="text-[11px] sm:text-sm font-medium uppercase tracking-wider sm:tracking-[0.2em] text-accent-light">
             Built for brands ready to grow beyond ordinary.
           </span>
         </motion.div>
@@ -35,9 +35,9 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.12] tracking-tight uppercase"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase"
         >
-          We Don't Just Market Brands. <br />
+          We Don't Just Market Brands. <br className="hidden sm:inline" />
           <span className="gradient-text">
             We Make Them Impossible To Ignore.
           </span>
@@ -60,7 +60,7 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-6 text-xs sm:text-sm font-semibold uppercase tracking-widest text-accent-light"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-6 text-xs sm:text-sm font-semibold uppercase tracking-wider sm:tracking-widest text-accent-light"
         >
           <span>Strategy</span>
           <span className="text-white/30">•</span>
@@ -76,18 +76,18 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6 w-full max-w-md sm:max-w-none mx-auto"
         >
           <Link
             href="/contact"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-xs sm:px-8 sm:py-4 sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 animate-float animate-glow-pulse uppercase tracking-wider"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider min-h-[48px]"
           >
             <span>Start a Conversation</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="#services"
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs sm:px-8 sm:py-4 sm:text-base font-semibold rounded-full border border-white/20 hover:border-accent text-white hover:text-accent-light bg-white/5 backdrop-blur-sm transition-all uppercase tracking-wider"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold rounded-full border border-white/20 hover:border-accent active:scale-[0.98] text-white hover:text-accent-light bg-white/5 backdrop-blur-sm transition-all uppercase tracking-wider min-h-[48px]"
           >
             Explore Services
           </Link>
@@ -95,8 +95,8 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 text-gray-500 animate-bounce">
-        <ChevronDown size={28} className="sm:w-8 sm:h-8" />
+      <div className="absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 text-gray-500 animate-bounce pointer-events-none">
+        <ChevronDown size={24} className="sm:w-8 sm:h-8" />
       </div>
     </section>
   );

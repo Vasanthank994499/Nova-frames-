@@ -32,6 +32,31 @@ const videos = [
 export default function VideoShowcase() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [playingId, setPlayingId] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      setActiveSlide((prev) => (prev + 1) % videos.length);
+    } else if (isRightSwipe) {
+      setActiveSlide((prev) => (prev - 1 + videos.length) % videos.length);
+    }
+  };
 
   const togglePlay = (id: number) => {
     setPlayingId(playingId === id ? null : id);
@@ -51,15 +76,20 @@ export default function VideoShowcase() {
           </div>
           <Link
             href="/clients"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:text-accent-glow mt-4 sm:mt-0 group"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:text-accent-glow mt-4 sm:mt-0 group min-h-[44px] py-1"
           >
             <span>View All Case Studies</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
 
-        {/* Responsive Grid on Tablet/Desktop & Switchable on Mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Responsive Grid on Tablet/Desktop & Touch-Swipeable on Mobile */}
+        <div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 touch-pan-y select-none sm:select-auto"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {videos.map((video, index) => (
             <motion.div
               key={video.id}
@@ -71,14 +101,14 @@ export default function VideoShowcase() {
               className={`${activeSlide === index ? 'block' : 'hidden'} sm:block w-full transition-all duration-300`}
             >
               <div
-                className={`w-full aspect-video rounded-2xl overflow-hidden relative bg-gradient-to-br ${video.gradient} cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300 border border-black/10`}
+                className={`w-full aspect-video rounded-2xl overflow-hidden relative bg-gradient-to-br ${video.gradient} cursor-pointer group shadow-md hover:shadow-xl active:scale-[0.99] transition-all duration-300 border border-black/10`}
                 onClick={() => togglePlay(video.id)}
               >
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors" />
                 
                 {/* Tag pill */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-white/80 text-xs font-medium border border-white/10">
+                <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
+                  <span className="px-2.5 py-1 sm:px-3 rounded-full bg-black/40 backdrop-blur-md text-white/80 text-[11px] sm:text-xs font-medium border border-white/10">
                     {video.tag}
                   </span>
                 </div>
@@ -104,18 +134,25 @@ export default function VideoShowcase() {
           ))}
         </div>
 
-        {/* Mobile-Only Navigation Dots */}
-        <div className="flex justify-center gap-2 mt-6 sm:hidden">
-          {videos.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                activeSlide === index ? 'bg-accent w-6' : 'bg-gray-300'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+        {/* Mobile-Only Touch-Friendly Navigation Dots & Hint */}
+        <div className="flex flex-col items-center gap-2 mt-6 sm:hidden">
+          <div className="flex justify-center items-center gap-1">
+            {videos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveSlide(index)}
+                className="p-2 flex items-center justify-center focus:outline-none"
+                aria-label={`Go to slide ${index + 1}`}
+              >
+                <span
+                  className={`block h-2.5 rounded-full transition-all duration-300 ${
+                    activeSlide === index ? 'bg-accent w-7' : 'bg-gray-300 w-2.5'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+          <span className="text-[11px] text-txt-muted font-medium">Swipe to explore stories</span>
         </div>
       </div>
     </section>

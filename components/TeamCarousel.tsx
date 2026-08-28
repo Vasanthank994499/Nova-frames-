@@ -33,7 +33,8 @@ export default function TeamCarousel() {
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { current } = scrollRef;
-      const scrollAmount = direction === 'left' ? -400 : 400;
+      const isMobile = window.innerWidth < 640;
+      const scrollAmount = (direction === 'left' ? -1 : 1) * (isMobile ? 280 : 360);
       current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -52,27 +53,24 @@ export default function TeamCarousel() {
           <div className="flex gap-2 sm:gap-3 self-end sm:self-auto">
             <button
               onClick={() => scroll('left')}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md active:scale-95 transition-all text-txt-primary"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md active:scale-95 transition-all text-txt-primary"
               aria-label="Scroll left"
             >
-              <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
+              <ChevronLeft size={22} className="sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md active:scale-95 transition-all text-txt-primary"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md active:scale-95 transition-all text-txt-primary"
               aria-label="Scroll right"
             >
-              <ChevronRight size={20} className="sm:w-6 sm:h-6" />
+              <ChevronRight size={22} className="sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>
 
-        <motion.div
+        <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 mt-8 sm:mt-12 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 sm:pb-8 -mx-4 px-4 sm:mx-0 sm:px-0"
-          drag="x"
-          dragConstraints={{ right: 0, left: -1000 }}
-          whileTap={{ cursor: 'grabbing' }}
+          className="flex gap-4 sm:gap-6 mt-8 sm:mt-12 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 sm:pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x overscroll-x-contain"
         >
           {team.map((member, index) => (
             <motion.div
@@ -108,7 +106,7 @@ export default function TeamCarousel() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -27,7 +27,7 @@ export default function Leadership() {
   ];
 
   return (
-    <section id="leadership" className="py-16 sm:py-24 bg-surface-alt border-t border-gray-100">
+    <section id="leadership" className="py-16 sm:py-24 bg-surface-alt border-t border-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-16">
           <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-accent font-semibold">

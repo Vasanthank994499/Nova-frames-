@@ -162,7 +162,7 @@ export default function ContactPage() {
                         href="https://maps.app.goo.gl/bT5u4kWdxTYabLfn8?g_st=ac" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-txt-muted hover:text-accent text-xs sm:text-sm mt-0.5 block transition-colors leading-relaxed"
+                        className="text-txt-muted hover:text-accent text-xs sm:text-sm mt-0.5 block transition-colors leading-relaxed break-words"
                       >
                         Novaframes, Sokkaramman Nagar, Kuruppanaickenpalayam, Tamil Nadu 638301
                       </a>

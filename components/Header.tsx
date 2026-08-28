@@ -19,6 +19,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile nav is open
+  useEffect(() => {
+    if (isMobileNavOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileNavOpen]);
+
   return (
     <>
       <header
@@ -42,7 +52,7 @@ export default function Header() {
           {/* 3-Dash Menu Button Alone */}
           <button
             onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-            className="z-50 text-white p-2 sm:p-2.5 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="z-50 text-white p-2.5 sm:p-2.5 rounded-lg hover:bg-white/10 active:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="Toggle Navigation Menu"
           >
             <AnimatePresence mode="wait">

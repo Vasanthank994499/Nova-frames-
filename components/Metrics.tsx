@@ -48,14 +48,14 @@ const MetricCard = ({ icon: Icon, target, suffix = '+', prefix = '', label }: Me
   const formattedCount = count >= 1000 ? count.toLocaleString() : count;
 
   return (
-    <div ref={ref} className="text-center p-5 sm:p-6 md:p-8 bg-dark-card/80 backdrop-blur-sm rounded-2xl border border-white/5 hover:border-accent/30 transition-all duration-300 flex flex-col justify-center items-center shadow-lg group">
-      <div className="flex justify-center mb-3 sm:mb-5 p-3 rounded-xl bg-white/5 text-accent group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-6 h-6 sm:w-8 sm:h-8" />
+    <div ref={ref} className="text-center p-3.5 sm:p-6 md:p-8 bg-dark-card/80 backdrop-blur-sm rounded-2xl border border-white/5 hover:border-accent/30 transition-all duration-300 flex flex-col justify-center items-center shadow-lg group">
+      <div className="flex justify-center mb-2.5 sm:mb-5 p-2.5 sm:p-3 rounded-xl bg-white/5 text-accent group-hover:scale-110 transition-transform duration-300">
+        <Icon className="w-5 h-5 sm:w-8 sm:h-8" />
       </div>
-      <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2 text-white tracking-tight">
+      <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2 text-white tracking-tight">
         {prefix}{formattedCount}{suffix}
       </div>
-      <div className="text-gray-400 text-xs sm:text-sm font-medium">
+      <div className="text-gray-400 text-[11px] sm:text-sm font-medium leading-snug">
         {label}
       </div>
     </div>

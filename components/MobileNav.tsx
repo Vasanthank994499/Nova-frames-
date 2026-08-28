@@ -53,26 +53,26 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-40 bg-[#0f172a]/95 backdrop-blur-2xl flex flex-col justify-between px-6 sm:px-12 py-20 sm:py-24 overflow-y-auto"
+          className="fixed inset-0 z-40 bg-[#0f172a]/95 backdrop-blur-2xl flex flex-col justify-between px-6 sm:px-12 py-16 sm:py-24 overflow-y-auto overscroll-contain"
         >
-          <div className="my-auto w-full max-w-lg mx-auto">
+          <div className="my-auto py-4 w-full max-w-lg mx-auto">
             {/* Logo Badge */}
-            <div className="flex justify-center mb-8 sm:mb-10">
+            <div className="flex justify-center mb-6 sm:mb-10">
               <img 
                 src="/logo.png" 
                 alt="Nova Frames Logo" 
-                className="w-16 h-16 rounded-2xl object-contain shadow-2xl border border-white/10 p-1 bg-black/30"
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain shadow-2xl border border-white/10 p-1 bg-black/30"
               />
             </div>
 
             {/* Navigation Links */}
-            <nav className="flex flex-col space-y-5 sm:space-y-7 items-center text-center w-full">
+            <nav className="flex flex-col space-y-3 sm:space-y-6 items-center text-center w-full">
               {navLinks.map((link) => (
                 <motion.div key={link.name} variants={linkVariants} className="w-full">
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="text-xl sm:text-2xl md:text-3xl font-semibold text-white transition-colors duration-300 hover:text-accent inline-flex items-center gap-2 group py-1"
+                    className="text-lg sm:text-2xl md:text-3xl font-semibold text-white transition-colors duration-300 hover:text-accent inline-flex items-center justify-center min-h-[44px] px-4 py-2 group w-full sm:w-auto"
                   >
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
                       {link.name}
@@ -83,11 +83,11 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             </nav>
 
             {/* Quick Action Button */}
-            <motion.div variants={linkVariants} className="mt-8 sm:mt-10 flex justify-center">
+            <motion.div variants={linkVariants} className="mt-6 sm:mt-10 flex justify-center">
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent hover:bg-accent-glow text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-lg shadow-accent/30"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:py-3 rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-lg shadow-accent/30 min-h-[44px]"
               >
                 <span>Start a Conversation</span>
                 <ArrowRight className="w-4 h-4" />
