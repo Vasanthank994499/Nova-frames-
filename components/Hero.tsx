@@ -44,21 +44,16 @@ export default function Hero() {
         </motion.h1>
 
         {/* Sub-Headline */}
-        <motion.div
+        <motion.p
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="max-w-3xl mx-auto mt-5 sm:mt-7 px-2"
+          className="text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto mt-5 sm:mt-7 leading-relaxed px-2 font-normal"
         >
-          <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed font-normal">
-            NovaFrames is a brand growth studio combining strategy, content and
-            performance marketing to build brands that people notice, remember and
-            choose.
-          </p>
-          <p className="text-xs sm:text-sm md:text-base text-gray-400 font-medium mt-2 sm:mt-2.5">
-            We are in the field past 2 years.
-          </p>
-        </motion.div>
+          NovaFrames is a brand growth studio combining strategy, content and
+          performance marketing to build brands that people notice, remember and
+          choose.
+        </motion.p>
 
         {/* Core Pillars */}
         <motion.div
