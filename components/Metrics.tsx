@@ -64,10 +64,10 @@ const MetricCard = ({ icon: Icon, target, suffix = '+', prefix = '', label }: Me
 
 export default function Metrics() {
   const metrics = [
-    { icon: Rocket, target: 20, suffix: '+', label: 'Brands Built & Supported' },
-    { icon: Layers, target: 5, suffix: '+', label: 'Industries Covered' },
-    { icon: Target, target: 1000, suffix: '+', label: 'Leads Generated' },
-    { icon: Users, target: 10, suffix: 'K+', label: 'Organic Audience Growth' },
+    { icon: Rocket, target: 30, suffix: '+', label: 'Brands Built & Supported' },
+    { icon: Layers, target: 12, suffix: '+', label: 'Industries Covered' },
+    { icon: Target, target: 10, suffix: 'K+', label: 'Leads Generated' },
+    { icon: Users, target: 100, suffix: 'K+', label: 'Organic Audience Growth' },
   ];
 
   return (
