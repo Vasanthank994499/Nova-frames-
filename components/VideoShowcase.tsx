@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
-const videos = [
+interface VideoItem {
+  id: number;
+  title: string;
+  subtitle: string;
+  gradient: string;
+  tag: string;
+  src?: string;
+}
+
+const videos: VideoItem[] = [
   {
     id: 1,
     title: 'Sri Bal Tex',
     subtitle: 'Generate 400+ leads',
     gradient: 'from-amber-950 via-amber-900 to-indigo-950',
     tag: 'Textiles & Apparel / Lead Gen',
+    src: '/videos/sri-bal-tex.mp4',
   },
   {
     id: 2,
@@ -29,9 +39,79 @@ const videos = [
   },
 ];
 
+function VideoCard({ video, isVisible, index }: { video: VideoItem; isVisible: boolean; index: number }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (video.src && videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    } else {
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className={`${isVisible ? 'block' : 'hidden'} sm:block w-full transition-all duration-300`}
+    >
+      <div
+        className={`w-full aspect-video rounded-2xl overflow-hidden relative bg-gradient-to-br ${video.gradient} cursor-pointer group shadow-md hover:shadow-xl active:scale-[0.99] transition-all duration-300 border border-black/10`}
+        onClick={togglePlay}
+      >
+        {video.src ? (
+          <video
+            ref={videoRef}
+            src={video.src}
+            className="w-full h-full object-cover"
+            playsInline
+            controls={isPlaying}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onEnded={() => setIsPlaying(false)}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors" />
+        )}
+
+        {/* Tag pill */}
+        <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10 pointer-events-none">
+          <span className="px-2.5 py-1 sm:px-3 rounded-full bg-black/50 backdrop-blur-md text-white/90 text-[11px] sm:text-xs font-medium border border-white/10 shadow-sm">
+            {video.tag}
+          </span>
+        </div>
+
+        {/* Play Button Overlay (visible when paused or non-video) */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/10 transition-colors">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center text-white relative transition-transform group-hover:scale-110 shadow-lg border border-white/20">
+              <Play size={24} className="sm:w-8 sm:h-8 relative z-10 ml-0.5 sm:ml-1" />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-3 sm:mt-4 text-left">
+        <h3 className="text-base sm:text-lg font-semibold text-txt-primary">{video.title}</h3>
+        <p className="text-txt-muted text-xs sm:text-sm mt-0.5">{video.subtitle}</p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function VideoShowcase() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [playingId, setPlayingId] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -56,10 +136,6 @@ export default function VideoShowcase() {
     } else if (isRightSwipe) {
       setActiveSlide((prev) => (prev - 1 + videos.length) % videos.length);
     }
-  };
-
-  const togglePlay = (id: number) => {
-    setPlayingId(playingId === id ? null : id);
   };
 
   return (
@@ -91,46 +167,12 @@ export default function VideoShowcase() {
           onTouchEnd={onTouchEnd}
         >
           {videos.map((video, index) => (
-            <motion.div
+            <VideoCard
               key={video.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className={`${activeSlide === index ? 'block' : 'hidden'} sm:block w-full transition-all duration-300`}
-            >
-              <div
-                className={`w-full aspect-video rounded-2xl overflow-hidden relative bg-gradient-to-br ${video.gradient} cursor-pointer group shadow-md hover:shadow-xl active:scale-[0.99] transition-all duration-300 border border-black/10`}
-                onClick={() => togglePlay(video.id)}
-              >
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors" />
-                
-                {/* Tag pill */}
-                <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
-                  <span className="px-2.5 py-1 sm:px-3 rounded-full bg-black/40 backdrop-blur-md text-white/80 text-[11px] sm:text-xs font-medium border border-white/10">
-                    {video.tag}
-                  </span>
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white relative transition-transform group-hover:scale-110 shadow-lg">
-                    {playingId === video.id && (
-                      <span className="absolute inset-0 rounded-full animate-ping bg-white/40" />
-                    )}
-                    {playingId === video.id ? (
-                      <Pause size={24} className="sm:w-8 sm:h-8 relative z-10" />
-                    ) : (
-                      <Play size={24} className="sm:w-8 sm:h-8 relative z-10 ml-0.5 sm:ml-1" />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="mt-3 sm:mt-4 text-left">
-                <h3 className="text-base sm:text-lg font-semibold text-txt-primary">{video.title}</h3>
-                <p className="text-txt-muted text-xs sm:text-sm mt-0.5">{video.subtitle}</p>
-              </div>
-            </motion.div>
+              video={video}
+              isVisible={activeSlide === index}
+              index={index}
+            />
           ))}
         </div>
 
