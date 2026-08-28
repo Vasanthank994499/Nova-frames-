@@ -22,6 +22,7 @@ export default function Leadership() {
       quote: '"Turning creative campaigns into measurable outcomes through relentless audience targeting, testing, and high-intent lead generation systems."',
       bio: 'Leads performance marketing, full-funnel paid media strategy, and ROI optimisation to ensure creative reaches the right high-intent audiences.',
       initials: 'TP',
+      image: '/team/premalatha.jpg',
       gradient: 'from-purple-500 to-pink-500',
       direction: 50,
     },

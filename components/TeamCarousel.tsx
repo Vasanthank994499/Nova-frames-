@@ -14,6 +14,7 @@ const team = [
   {
     name: 'T. Premalatha',
     role: 'Co-Founder, Performance Marketing',
+    image: '/team/premalatha.jpg',
     gradient: 'from-fuchsia-600/40 to-pink-600/40',
   },
   {

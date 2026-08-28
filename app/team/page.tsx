@@ -17,6 +17,7 @@ const team = [
   {
     name: 'T. Premalatha',
     role: 'Co-Founder, Performance Marketing',
+    image: '/team/premalatha.jpg',
     department: 'Performance & Growth',
     skills: ['Paid Media', 'Targeting & Funnels', 'Lead Generation'],
     gradient: 'from-purple-500 to-pink-500',
