@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Instagram, Facebook, Linkedin } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, ArrowRight } from 'lucide-react';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -10,9 +10,10 @@ interface MobileNavProps {
 }
 
 const navLinks = [
+  { name: 'Services', href: '/#services' },
+  { name: 'Featured Reels & Work', href: '/#video-showcase' },
   { name: 'Clients & Case Studies', href: '/clients' },
-  { name: 'Portfolio Reel', href: '/#video-showcase' },
-  { name: 'Our Team', href: '/team' },
+  { name: 'Our Team & Leadership', href: '/team' },
   { name: 'Contact / Book Inquiry', href: '/contact' },
 ];
 
@@ -24,8 +25,8 @@ const containerVariants = {
       type: 'spring', 
       damping: 25, 
       stiffness: 200, 
-      staggerChildren: 0.1, 
-      delayChildren: 0.2 
+      staggerChildren: 0.08, 
+      delayChildren: 0.15 
     }
   },
   exit: { 
@@ -52,23 +53,26 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-40 bg-[#0f172a]/95 backdrop-blur-xl flex flex-col justify-between px-6 sm:px-10 py-24 sm:py-28 overflow-y-auto"
+          className="fixed inset-0 z-40 bg-[#0f172a]/95 backdrop-blur-2xl flex flex-col justify-between px-6 sm:px-12 py-20 sm:py-24 overflow-y-auto"
         >
-          <div className="my-auto w-full">
-            <div className="flex justify-center mb-8">
+          <div className="my-auto w-full max-w-lg mx-auto">
+            {/* Logo Badge */}
+            <div className="flex justify-center mb-8 sm:mb-10">
               <img 
                 src="/logo.png" 
                 alt="Nova Frames Logo" 
-                className="w-14 h-14 rounded-2xl object-contain shadow-lg border border-white/10"
+                className="w-16 h-16 rounded-2xl object-contain shadow-2xl border border-white/10 p-1 bg-black/30"
               />
             </div>
-            <nav className="flex flex-col space-y-6 sm:space-y-8 items-center text-center w-full">
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col space-y-5 sm:space-y-7 items-center text-center w-full">
               {navLinks.map((link) => (
-                <motion.div key={link.name} variants={linkVariants}>
+                <motion.div key={link.name} variants={linkVariants} className="w-full">
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="text-2xl sm:text-3xl md:text-4xl font-semibold text-surface transition-colors duration-300 hover:text-accent inline-block group py-1"
+                    className="text-xl sm:text-2xl md:text-3xl font-semibold text-white transition-colors duration-300 hover:text-accent inline-flex items-center gap-2 group py-1"
                   >
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
                       {link.name}
@@ -77,20 +81,33 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 </motion.div>
               ))}
             </nav>
+
+            {/* Quick Action Button */}
+            <motion.div variants={linkVariants} className="mt-8 sm:mt-10 flex justify-center">
+              <Link
+                href="/contact"
+                onClick={onClose}
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent hover:bg-accent-glow text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-lg shadow-accent/30"
+              >
+                <span>Start a Conversation</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
           </div>
 
+          {/* Bottom Social Links */}
           <motion.div 
             variants={linkVariants}
-            className="pt-8 flex justify-center space-x-6 sm:space-x-8 text-surface/80"
+            className="pt-8 flex justify-center space-x-6 sm:space-x-8 text-white/70"
           >
-            <a href="#" className="p-2 hover:text-accent hover:scale-110 transition-all duration-300" aria-label="Instagram">
-              <Instagram className="w-6 h-6 sm:w-8 sm:h-8" />
+            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" aria-label="Instagram">
+              <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
-            <a href="#" className="p-2 hover:text-accent hover:scale-110 transition-all duration-300" aria-label="Facebook">
-              <Facebook className="w-6 h-6 sm:w-8 sm:h-8" />
+            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" aria-label="Facebook">
+              <Facebook className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
-            <a href="#" className="p-2 hover:text-accent hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
-              <Linkedin className="w-6 h-6 sm:w-8 sm:h-8" />
+            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </motion.div>
         </motion.div>

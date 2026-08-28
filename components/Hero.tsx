@@ -9,12 +9,12 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-dark flex items-center justify-center pt-16">
       {/* Background 3D Wireframe Globe */}
-      <div className="absolute inset-0 opacity-60 z-0 pointer-events-none">
+      <div className="absolute inset-0 opacity-85 z-0 pointer-events-none">
         <Globe />
       </div>
 
       {/* Radial Gradient Vignette Overlay */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0a0a0a_80%)] pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_transparent_10%,_#0a0a0a_85%)] pointer-events-none" />
 
       {/* Content Container */}
       <div className="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-28">

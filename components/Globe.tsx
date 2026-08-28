@@ -18,7 +18,7 @@ export default function Globe() {
     let rotation = 0;
 
     // Dots setup
-    const numDots = 60;
+    const numDots = 75;
     const dots: { x: number; y: number; z: number }[] = [];
     for (let i = 0; i < numDots; i++) {
       const theta = Math.random() * 2 * Math.PI;
@@ -31,7 +31,7 @@ export default function Globe() {
     }
 
     // Connections setup
-    const numConnections = 6;
+    const numConnections = 10;
     const connections: { from: number; to: number }[] = [];
     for (let i = 0; i < numConnections; i++) {
       const from = Math.floor(Math.random() * numDots);
@@ -54,12 +54,12 @@ export default function Globe() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const radius = Math.min(width, height) * 0.35;
+      const radius = Math.min(width, height) * 0.36;
       const cx = width / 2;
       const cy = height / 2;
       const fov = 400;
 
-      rotation += 0.002;
+      rotation += 0.0025;
 
       const project = (x: number, y: number, z: number) => {
         // Rotate around Y axis
@@ -75,9 +75,9 @@ export default function Globe() {
         return { x: projX, y: projY, z: rotZ };
       };
 
-      // Draw latitude lines (8)
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.15)";
-      ctx.lineWidth = 1;
+      // Draw latitude lines (8) - Richer & darker/clearer stroke
+      ctx.strokeStyle = "rgba(99, 102, 241, 0.32)";
+      ctx.lineWidth = 1.3;
       
       for (let lat = 1; lat < 8; lat++) {
         const phi = (lat / 8) * Math.PI;
@@ -94,7 +94,7 @@ export default function Globe() {
         ctx.stroke();
       }
 
-      // Draw longitude lines (12)
+      // Draw longitude lines (12) - Richer & darker/clearer stroke
       for (let lon = 0; lon < 12; lon++) {
         const theta = (lon / 12) * 2 * Math.PI;
         ctx.beginPath();
@@ -111,7 +111,8 @@ export default function Globe() {
       }
 
       // Draw connections
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.1)";
+      ctx.strokeStyle = "rgba(129, 140, 248, 0.22)";
+      ctx.lineWidth = 1;
       ctx.beginPath();
       for (const conn of connections) {
         const from = dots[conn.from];
@@ -123,13 +124,13 @@ export default function Globe() {
       }
       ctx.stroke();
 
-      // Draw dots
-      ctx.fillStyle = "rgba(99, 102, 241, 0.3)";
+      // Draw dots - Brighter & bolder
+      ctx.fillStyle = "rgba(129, 140, 248, 0.65)";
       for (const dot of dots) {
         const proj = project(dot.x, dot.y, dot.z);
         if (proj.z > -0.5) {
             ctx.beginPath();
-            ctx.arc(proj.x, proj.y, 2, 0, 2 * Math.PI);
+            ctx.arc(proj.x, proj.y, 2.4, 0, 2 * Math.PI);
             ctx.fill();
         }
       }

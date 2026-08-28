@@ -38,59 +38,61 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            <Link href="#services" className="hover:text-white transition-colors">
-              Services
-            </Link>
-            <Link href="#video-showcase" className="hover:text-white transition-colors">
-              Our Work
-            </Link>
-            <Link href="#leadership" className="hover:text-white transition-colors">
-              Team
-            </Link>
-            <Link href="/clients" className="hover:text-white transition-colors">
-              Clients
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-accent hover:bg-accent-glow text-white text-xs uppercase font-semibold tracking-wider transition-all shadow-md shadow-accent/20"
-            >
-              <span>Inquire</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </nav>
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-gray-300">
+              <Link href="/#services" className="hover:text-white transition-colors">
+                Services
+              </Link>
+              <Link href="/#video-showcase" className="hover:text-white transition-colors">
+                Our Work
+              </Link>
+              <Link href="/#leadership" className="hover:text-white transition-colors">
+                Team
+              </Link>
+              <Link href="/clients" className="hover:text-white transition-colors">
+                Clients
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-accent hover:bg-accent-glow text-white text-xs uppercase font-semibold tracking-wider transition-all shadow-md shadow-accent/20"
+              >
+                <span>Inquire</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </nav>
 
-          {/* Mobile Hamburger Toggle */}
-          <button
-            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-            className="md:hidden z-50 text-white p-2 sm:p-2.5 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40"
-            aria-label="Toggle Navigation"
-          >
-            <AnimatePresence mode="wait">
-              {isMobileNavOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X size={24} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu size={24} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
+            {/* Sidebar Hamburger Toggle */}
+            <button
+              onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+              className="z-50 text-white p-2 sm:p-2.5 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40"
+              aria-label="Toggle Navigation Sidebar"
+            >
+              <AnimatePresence mode="wait">
+                {isMobileNavOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={24} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={24} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
       </header>
 
