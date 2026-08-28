@@ -5,37 +5,31 @@ import { Sparkles, Film, Users, TrendingUp, Target, Rocket } from 'lucide-react'
 
 const services = [
   {
-    number: '01',
     title: 'Brand Positioning',
     description: 'We define what makes your brand different — and build a distinct digital identity around it.',
     icon: Sparkles,
   },
   {
-    number: '02',
     title: 'Content & Storytelling',
     description: 'Reels, campaigns, storytelling and visual experiences designed to earn genuine audience attention.',
     icon: Film,
   },
   {
-    number: '03',
     title: 'Social Media',
     description: 'We build active communities and customer relationships, not just vanity follower counts.',
     icon: Users,
   },
   {
-    number: '04',
     title: 'Performance Marketing',
     description: 'Strategic paid campaigns designed around enquiries, qualified customers, and measurable ROI.',
     icon: TrendingUp,
   },
   {
-    number: '05',
     title: 'Lead Generation',
     description: 'We create reliable systems that turn digital attention into high-intent business opportunities.',
     icon: Target,
   },
   {
-    number: '06',
     title: 'Brand Growth',
     description: 'A cohesive combination of strategy, creativity, and performance built around your business goals.',
     icon: Rocket,
@@ -87,13 +81,10 @@ export default function Services() {
               className="bg-surface-alt border border-gray-100 rounded-2xl p-6 sm:p-8 hover:shadow-xl hover:border-accent/20 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="mb-6">
                   <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors duration-300">
                     <service.icon size={24} strokeWidth={2} />
                   </div>
-                  <span className="text-xs font-bold text-accent/60 tracking-wider">
-                    {service.number}
-                  </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-txt-primary group-hover:text-accent transition-colors duration-200">
                   {service.title}
