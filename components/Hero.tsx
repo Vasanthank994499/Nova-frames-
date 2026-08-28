@@ -35,12 +35,9 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase"
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase"
         >
-          We Build The Brands <br className="hidden sm:inline" />
-          <span className="gradient-text">
-            That Scale.
-          </span>
+          We Build The Brands That Scale.
         </motion.h1>
 
         {/* Sub-Headline */}
