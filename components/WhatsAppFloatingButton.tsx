@@ -25,11 +25,8 @@ export default function WhatsAppFloatingButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Nova Frames on WhatsApp"
-        className="relative w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:shadow-[#25D366]/40 active:scale-95 hover:scale-105 transition-all duration-300"
+        className="relative w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-xl hover:shadow-[#25D366]/40 active:scale-95 hover:scale-105 transition-all duration-300"
       >
-        {/* Pulsing ring */}
-        <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping -z-10" />
-
         {/* WhatsApp SVG Icon */}
         <svg
           className="w-7 h-7 sm:w-8 sm:h-8 fill-current"
