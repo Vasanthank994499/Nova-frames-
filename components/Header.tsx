@@ -34,7 +34,7 @@ export default function Header() {
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shadow-md group-hover:scale-105 transition-transform duration-300"
             />
             <span className="font-extrabold uppercase tracking-wide">
-              Nova<span className="text-accent mx-0.5 mb-1 text-2xl leading-[0]">.</span>Frames
+              Nova Frames
             </span>
           </Link>
 
