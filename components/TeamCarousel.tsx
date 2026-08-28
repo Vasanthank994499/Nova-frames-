@@ -100,7 +100,13 @@ export default function TeamCarousel() {
                 <p className="text-accent-light text-xs sm:text-sm font-medium mt-0.5 sm:mt-1">{member.role}</p>
                 
                 <div className="flex gap-3 mt-3 pt-2 border-t border-white/10 opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a href="#" className="p-1 text-white hover:text-accent transition-colors" aria-label="LinkedIn">
+                  <a 
+                    href="https://www.linkedin.com/company/nova-frames" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-1 text-white hover:text-accent transition-colors" 
+                    aria-label="LinkedIn"
+                  >
                     <Linkedin size={18} />
                   </a>
                   <a 

@@ -35,7 +35,13 @@ export default function Footer() {
               <a href="#" className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white active:scale-95 transition-all duration-300 shadow-sm" aria-label="Facebook">
                 <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white active:scale-95 transition-all duration-300 shadow-sm" aria-label="LinkedIn">
+              <a 
+                href="https://www.linkedin.com/company/nova-frames" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white active:scale-95 transition-all duration-300 shadow-sm" 
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             </div>

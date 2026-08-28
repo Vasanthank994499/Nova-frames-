@@ -82,9 +82,15 @@ export default function Leadership() {
                 </p>
                 
                 <div className="flex justify-center sm:justify-start gap-2 sm:gap-3 mt-4 pt-2">
-                  <Link href="#" className="text-txt-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-surface-alt" aria-label="LinkedIn">
+                  <a 
+                    href="https://www.linkedin.com/company/nova-frames" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-txt-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-surface-alt" 
+                    aria-label="LinkedIn"
+                  >
                     <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </Link>
+                  </a>
                   <a 
                     href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
                     target="_blank" 

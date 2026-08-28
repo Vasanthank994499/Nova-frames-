@@ -130,7 +130,13 @@ export default function TeamPage() {
                     ))}
                   </div>
                   <div className="flex gap-3 mt-5">
-                    <a href="#" className="p-2 bg-surface rounded-full text-txt-muted hover:text-accent shadow-sm transition-colors" aria-label={`${member.name} LinkedIn`}>
+                    <a 
+                      href="https://www.linkedin.com/company/nova-frames" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-2 bg-surface rounded-full text-txt-muted hover:text-accent shadow-sm transition-colors" 
+                      aria-label={`${member.name} LinkedIn`}
+                    >
                       <Linkedin className="w-4 h-4" />
                     </a>
                     <a 

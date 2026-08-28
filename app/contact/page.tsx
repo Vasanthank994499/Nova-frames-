@@ -220,7 +220,13 @@ export default function ContactPage() {
                     <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" aria-label="Facebook">
                       <Facebook className="w-4 h-4" />
                     </a>
-                    <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" aria-label="LinkedIn">
+                    <a 
+                      href="https://www.linkedin.com/company/nova-frames" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" 
+                      aria-label="LinkedIn"
+                    >
                       <Linkedin className="w-4 h-4" />
                     </a>
                   </div>

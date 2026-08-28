@@ -112,7 +112,13 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" aria-label="Facebook">
               <Facebook className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
-            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
+            <a 
+              href="https://www.linkedin.com/company/nova-frames" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-2.5 rounded-full bg-white/5 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300" 
+              aria-label="LinkedIn"
+            >
               <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </motion.div>
