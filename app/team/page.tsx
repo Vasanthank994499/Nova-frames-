@@ -123,7 +123,13 @@ export default function TeamPage() {
                     <a href="#" className="p-2 bg-surface rounded-full text-txt-muted hover:text-accent shadow-sm transition-colors" aria-label={`${member.name} LinkedIn`}>
                       <Linkedin className="w-4 h-4" />
                     </a>
-                    <a href="#" className="p-2 bg-surface rounded-full text-txt-muted hover:text-accent shadow-sm transition-colors" aria-label={`${member.name} Instagram`}>
+                    <a 
+                      href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-2 bg-surface rounded-full text-txt-muted hover:text-accent shadow-sm transition-colors" 
+                      aria-label={`${member.name} Instagram`}
+                    >
                       <Instagram className="w-4 h-4" />
                     </a>
                   </div>

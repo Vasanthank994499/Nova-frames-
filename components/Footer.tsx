@@ -17,21 +17,27 @@ export default function Footer() {
                 alt="Nova Frames Logo" 
                 className="w-8 h-8 rounded-xl object-contain shadow-sm"
               />
-              <span>Nova Frames<span className="text-accent">.</span></span>
+              <span>Nova Frames</span>
             </div>
             <p className="text-sm text-txt-muted mt-3 sm:mt-4 leading-relaxed">
               Bridging creativity and data to build digital experiences that perform, inspire, and scale.
             </p>
             <div className="flex gap-3 sm:gap-4 mt-6">
-              <Link href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" aria-label="Instagram">
+              <a 
+                href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" 
+                aria-label="Instagram"
+              >
                 <Instagram className="w-4 h-4" />
-              </Link>
-              <Link href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" aria-label="Facebook">
+              </a>
+              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" aria-label="Facebook">
                 <Facebook className="w-4 h-4" />
-              </Link>
-              <Link href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+              </a>
+              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-alt flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300" aria-label="LinkedIn">
                 <Linkedin className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
 

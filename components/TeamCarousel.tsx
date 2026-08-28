@@ -95,7 +95,13 @@ export default function TeamCarousel() {
                   <a href="#" className="p-1 text-white hover:text-accent transition-colors" aria-label="LinkedIn">
                     <Linkedin size={18} />
                   </a>
-                  <a href="#" className="p-1 text-white hover:text-accent transition-colors" aria-label="Instagram">
+                  <a 
+                    href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-1 text-white hover:text-accent transition-colors" 
+                    aria-label="Instagram"
+                  >
                     <Instagram size={18} />
                   </a>
                 </div>

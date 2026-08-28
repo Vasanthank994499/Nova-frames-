@@ -75,9 +75,15 @@ export default function Leadership() {
                   <Link href="#" className="text-txt-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-surface-alt" aria-label="LinkedIn">
                     <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
-                  <Link href="#" className="text-txt-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-surface-alt" aria-label="Instagram">
+                  <a 
+                    href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-txt-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-surface-alt" 
+                    aria-label="Instagram"
+                  >
                     <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

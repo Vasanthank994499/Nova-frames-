@@ -200,7 +200,13 @@ export default function ContactPage() {
                 <div className="border-t border-gray-200 mt-6 sm:mt-8 pt-6 sm:pt-8">
                   <h4 className="text-xs sm:text-sm font-bold text-txt-primary mb-3 sm:mb-4">Follow Us</h4>
                   <div className="flex gap-3 sm:gap-4">
-                    <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" aria-label="Instagram">
+                    <a 
+                      href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw==" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" 
+                      aria-label="Instagram"
+                    >
                       <Instagram className="w-4 h-4" />
                     </a>
                     <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-muted flex items-center justify-center text-txt-secondary hover:bg-accent hover:text-white transition-colors" aria-label="Facebook">
