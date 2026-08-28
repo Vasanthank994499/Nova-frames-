@@ -8,6 +8,7 @@ const team = [
   {
     name: 'Hari Prasath',
     role: 'Founder & CEO',
+    image: '/team/hari-prasath.jpg',
     gradient: 'from-indigo-600/40 to-purple-600/40',
   },
   {
@@ -79,10 +80,18 @@ export default function TeamCarousel() {
               initial="initial"
               whileHover="hover"
             >
-              {/* Card watermark initials */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/15 text-5xl sm:text-6xl font-black select-none tracking-widest">
-                {member.name.split(' ').map(n => n[0]).join('')}
-              </div>
+              {/* Photo or Watermark initials */}
+              {member.image ? (
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="absolute inset-0 w-full h-full object-cover object-top filter brightness-[0.95] group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-white/15 text-5xl sm:text-6xl font-black select-none tracking-widest">
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
 
               {/* Persistent mobile gradient with expand on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/50 to-transparent flex flex-col justify-end p-5 sm:p-6 transition-all duration-300">

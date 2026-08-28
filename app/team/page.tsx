@@ -8,6 +8,7 @@ const team = [
   {
     name: 'Hari Prasath',
     role: 'Founder & CEO',
+    image: '/team/hari-prasath.jpg',
     department: 'Leadership & Strategy',
     skills: ['Brand Positioning', 'Creative Direction', 'Business Growth'],
     gradient: 'from-accent to-accent-glow',
@@ -93,10 +94,18 @@ export default function TeamPage() {
                 className="bg-surface-alt rounded-3xl overflow-hidden hover:shadow-xl hover:border-accent/20 transition-all duration-300 flex flex-col border border-gray-100 p-6 sm:p-8"
               >
                 <div className="flex items-center gap-5 mb-6">
-                  <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center flex-shrink-0 shadow-md`}>
-                    <span className="text-xl sm:text-2xl font-bold text-white tracking-wider">
-                      {getInitials(member.name)}
-                    </span>
+                  <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${member.image ? 'p-0.5 border-2 border-accent/30 shadow-lg overflow-hidden bg-surface' : `bg-gradient-to-br ${member.gradient} shadow-md`} flex items-center justify-center flex-shrink-0`}>
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full rounded-xl object-cover object-top"
+                      />
+                    ) : (
+                      <span className="text-xl sm:text-2xl font-bold text-white tracking-wider">
+                        {getInitials(member.name)}
+                      </span>
+                    )}
                   </div>
                   <div>
                     <h2 className="text-xl sm:text-2xl font-bold text-txt-primary">{member.name}</h2>

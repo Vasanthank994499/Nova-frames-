@@ -12,6 +12,7 @@ export default function Leadership() {
       quote: '"We don\'t want to be another agency your brand hires. We want to become part of the reason your brand grows."',
       bio: 'Built NovaFrames with the belief that ambitious businesses deserve tier-1 creative thinking, strategic positioning, and performance marketing under one roof.',
       initials: 'HP',
+      image: '/team/hari-prasath.jpg',
       gradient: 'from-accent to-accent-glow',
       direction: -50,
     },
@@ -51,10 +52,18 @@ export default function Leadership() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-start gap-5 sm:gap-8 bg-surface p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-accent/20 transition-all duration-300"
             >
-              <div className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex-shrink-0 rounded-full bg-gradient-to-br ${leader.gradient} flex items-center justify-center shadow-md`}>
-                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-wider">
-                  {leader.initials}
-                </span>
+              <div className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex-shrink-0 rounded-full ${leader.image ? 'p-1 border-2 border-accent/30 shadow-lg overflow-hidden bg-surface' : `bg-gradient-to-br ${leader.gradient} shadow-md`} flex items-center justify-center`}>
+                {leader.image ? (
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-full h-full rounded-full object-cover object-top"
+                  />
+                ) : (
+                  <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-wider">
+                    {leader.initials}
+                  </span>
+                )}
               </div>
               
               <div className="flex-grow">
