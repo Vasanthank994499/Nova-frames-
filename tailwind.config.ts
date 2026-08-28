@@ -31,9 +31,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-syne)", "system-ui", "sans-serif"],
-        body: ["var(--font-inter)", "system-ui", "sans-serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        display: ["var(--font-poppins)", "sans-serif"],
+        body: ["var(--font-poppins)", "sans-serif"],
+        sans: ["var(--font-poppins)", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
       },
       animation: {
         marquee: "marquee 30s linear infinite",
