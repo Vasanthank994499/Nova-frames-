@@ -17,10 +17,10 @@ interface VideoItem {
 const videos: VideoItem[] = [
   {
     id: 1,
-    title: 'Sri Bal Tex',
+    title: 'Sree Balaji Jewellers',
     subtitle: 'Generate 400+ leads',
     gradient: 'from-amber-950 via-amber-900 to-indigo-950',
-    tag: 'Textiles & Apparel / Lead Gen',
+    tag: 'Jewellery / Brand Growth',
     src: '/videos/sri-bal-tex.mp4',
   },
   {
