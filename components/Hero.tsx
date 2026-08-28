@@ -71,25 +71,19 @@ export default function Hero() {
           <span>Growth</span>
         </motion.div>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6 w-full max-w-md sm:max-w-none mx-auto"
+          className="mt-8 sm:mt-12 flex items-center justify-center w-full max-w-md sm:max-w-none mx-auto"
         >
           <Link
             href="/contact"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider min-h-[48px]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider min-h-[48px]"
           >
             <span>Start a Conversation</span>
             <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link
-            href="#services"
-            className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold rounded-full border border-white/20 hover:border-accent active:scale-[0.98] text-white hover:text-accent-light bg-white/5 backdrop-blur-sm transition-all uppercase tracking-wider min-h-[48px]"
-          >
-            Explore Services
           </Link>
         </motion.div>
       </div>
