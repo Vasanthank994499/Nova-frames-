@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin, CheckCircle2 } from 'lucide-react';
+import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -230,6 +231,9 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Floating WhatsApp Message Icon exclusively on Get in Touch page */}
+      <WhatsAppFloatingButton />
     </div>
   );
 }
