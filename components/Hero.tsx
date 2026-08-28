@@ -37,9 +37,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase"
         >
-          We Don't Just Market Brands. <br className="hidden sm:inline" />
+          We Build The Brands <br className="hidden sm:inline" />
           <span className="gradient-text">
-            We Make Them Impossible To Ignore.
+            That Scale.
           </span>
         </motion.h1>
 
