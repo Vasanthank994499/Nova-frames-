@@ -34,9 +34,10 @@ const videos: VideoItem[] = [
   {
     id: 3,
     title: 'Sagar Readymades',
-    subtitle: 'Festive Sales Drive & Store Walk-in Campaign (+30–40% Walk-ins)',
+    subtitle: 'Festive Sales Drive & Store Walk-in Campaign (+30–40% Walk-ins) and 2k to 26k followers in 3 months',
     gradient: 'from-rose-950 via-purple-950 to-indigo-950',
     tag: 'Retail / Performance Ads',
+    src: '/videos/sagar-readymades.mp4',
   },
 ];
 
