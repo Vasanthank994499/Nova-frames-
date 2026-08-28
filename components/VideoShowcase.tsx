@@ -18,17 +18,18 @@ const videos: VideoItem[] = [
   {
     id: 1,
     title: 'Sree Balaji Jewellers',
-    subtitle: 'Generate 400+ leads',
+    subtitle: '3K to 7K followers in 3 months',
     gradient: 'from-amber-950 via-amber-900 to-indigo-950',
     tag: 'Jewellery / Brand Growth',
     src: '/videos/sri-bal-tex.mp4',
   },
   {
     id: 2,
-    title: 'Sri Varagi Promoters',
-    subtitle: 'Real Estate Brand Storytelling & High-Intent Enquiries',
+    title: 'Sri Bal Tex',
+    subtitle: 'Generate 400+ leads',
     gradient: 'from-blue-950 via-slate-900 to-indigo-950',
-    tag: 'Real Estate / Lead Gen',
+    tag: 'Textiles & B2B / Lead Gen',
+    src: '/videos/bal-tex.mp4',
   },
   {
     id: 3,
