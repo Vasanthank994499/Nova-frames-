@@ -8,10 +8,10 @@ import Link from 'next/link';
 const videos = [
   {
     id: 1,
-    title: 'Sree Balaji Jewellers',
-    subtitle: 'Organic Community & Instagram Reel Series (3K → 10K+)',
+    title: 'Sri Bal Tex',
+    subtitle: 'Generate 400+ leads',
     gradient: 'from-amber-950 via-amber-900 to-indigo-950',
-    tag: 'Jewellery / Brand Growth',
+    tag: 'Textiles & Apparel / Lead Gen',
   },
   {
     id: 2,
