@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Eye, Sparkles, Instagram, ArrowUpRight } from 'lucide-react';
+import { Play, Pause, Eye, Sparkles, Instagram, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface Reel {
@@ -81,17 +81,29 @@ const reels: Reel[] = [
 
 export default function SampleWorks() {
   const [playingId, setPlayingId] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const togglePlay = (id: number) => {
     setPlayingId(playingId === id ? null : id);
   };
 
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const isMobile = window.innerWidth < 640;
+      const scrollAmount = (direction === 'left' ? -1 : 1) * (isMobile ? 290 : 360);
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="sample-works" className="py-20 sm:py-28 bg-dark text-white relative overflow-hidden border-t border-white/5">
+      {/* Subtle Ambient Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/15 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        {/* Section Header with Left/Right Scroll Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent-light text-xs font-semibold uppercase tracking-[0.2em] mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -101,39 +113,50 @@ export default function SampleWorks() {
               Featured Reel Content
             </h2>
             <p className="text-gray-400 mt-2 sm:mt-3 text-sm sm:text-base max-w-xl">
-              High-converting, scroll-stopping 9:16 vertical reels engineered to captivate audiences and drive measurable business traction.
+              Swipe sideways to explore high-converting 9:16 vertical reels crafted for client growth.
             </p>
           </div>
 
-          <a
-            href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw=="
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-accent text-white hover:text-accent transition-all text-xs sm:text-sm font-semibold uppercase tracking-wider self-start sm:self-auto group"
-          >
-            <Instagram className="w-4 h-4 text-accent" />
-            <span>Explore on Instagram</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          <div className="flex items-center gap-3 self-end sm:self-auto">
+            {/* Scroll Left Button */}
+            <button
+              onClick={() => scroll('left')}
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center hover:bg-white/15 hover:border-accent active:scale-95 transition-all text-white"
+              aria-label="Scroll reels left"
+            >
+              <ChevronLeft size={22} className="sm:w-6 sm:h-6" />
+            </button>
+
+            {/* Scroll Right Button */}
+            <button
+              onClick={() => scroll('right')}
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center hover:bg-white/15 hover:border-accent active:scale-95 transition-all text-white"
+              aria-label="Scroll reels right"
+            >
+              <ChevronRight size={22} className="sm:w-6 sm:h-6" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {reels.map((reel, index) => {
+        {/* Sidewards / Horizontal Scrolling Container */}
+        <div
+          ref={scrollRef}
+          className="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x overscroll-x-contain"
+        >
+          {reels.map((reel) => {
             const isPlaying = playingId === reel.id;
 
             return (
-              <motion.div
+              <div
                 key={reel.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-                className="bg-dark-card/90 border border-white/5 rounded-3xl p-4 sm:p-5 hover:border-accent/30 transition-all duration-300 shadow-xl group flex flex-col justify-between"
+                className="w-[270px] sm:w-[310px] md:w-[330px] flex-shrink-0 snap-center bg-dark-card/90 border border-white/5 rounded-3xl p-4 sm:p-5 hover:border-accent/30 transition-all duration-300 shadow-xl group flex flex-col justify-between"
               >
+                {/* 9:16 Smartphone Vertical Reel Frame */}
                 <div
                   onClick={() => togglePlay(reel.id)}
-                  className={`w-full aspect-[9/14] sm:aspect-[9/15] rounded-2xl overflow-hidden relative bg-gradient-to-br ${reel.gradient} cursor-pointer group-hover:shadow-2xl group-hover:shadow-accent/20 transition-all duration-500 border border-white/10 flex flex-col justify-between p-4`}
+                  className={`w-full aspect-[9/15] rounded-2xl overflow-hidden relative bg-gradient-to-br ${reel.gradient} cursor-pointer group-hover:shadow-2xl group-hover:shadow-accent/20 transition-all duration-500 border border-white/10 flex flex-col justify-between p-4`}
                 >
+                  {/* Top Bar: Category Pill & Views Badge */}
                   <div className="flex items-center justify-between z-10">
                     <span className="px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white/90 text-[11px] font-medium border border-white/10">
                       {reel.category}
@@ -144,6 +167,7 @@ export default function SampleWorks() {
                     </span>
                   </div>
 
+                  {/* Center Play/Pause Button */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white relative transition-transform duration-300 ${isPlaying ? 'scale-105 bg-accent/40' : 'group-hover:scale-110'}`}>
                       {isPlaying && (
@@ -157,10 +181,11 @@ export default function SampleWorks() {
                     </div>
                   </div>
 
+                  {/* Bottom Bar: Client Info & Sound Waveform */}
                   <div className="z-10 bg-black/60 backdrop-blur-md rounded-xl p-3 border border-white/10">
                     <div className="flex items-center justify-between text-xs text-white/80 font-medium">
-                      <span className="font-semibold text-white">{reel.client}</span>
-                      <span className="text-[11px] text-accent-light">{reel.duration}</span>
+                      <span className="font-semibold text-white truncate max-w-[170px]">{reel.client}</span>
+                      <span className="text-[11px] text-accent-light flex-shrink-0">{reel.duration}</span>
                     </div>
                     <div className="flex items-center justify-between text-[11px] text-gray-400 mt-1">
                       <span>{reel.engagement}</span>
@@ -174,29 +199,45 @@ export default function SampleWorks() {
                   </div>
                 </div>
 
+                {/* Card Title & Client Subtitle */}
                 <div className="mt-4 pt-1 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-accent transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-accent transition-colors line-clamp-1">
                       {reel.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-400 mt-0.5">
+                    <p className="text-xs sm:text-sm text-gray-400 mt-0.5 truncate">
                       Client Campaign • {reel.client}
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
-        <div className="mt-12 sm:mt-16 text-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent hover:bg-accent-glow text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50"
-          >
-            <span>Create Your Brand Reels</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
+        {/* Footer Actions */}
+        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-8">
+          <p className="text-xs sm:text-sm text-gray-400">
+            👈 <span className="font-medium text-white">Scroll sideways</span> to view all 6 featured reel productions.
+          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.instagram.com/nova_.frames?igsi=MWp2OXk4bjIxZmRjaw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-accent transition-colors"
+            >
+              <Instagram className="w-4 h-4 text-accent" />
+              <span>Instagram Portfolio</span>
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-accent hover:bg-accent-glow text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md shadow-accent/30"
+            >
+              <span>Book Reel Shoot</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
