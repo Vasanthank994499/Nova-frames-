@@ -2,115 +2,101 @@
 
 import { motion } from 'framer-motion';
 
-const clients = [
+const caseStudies = [
   {
-    name: 'TechVault Inc.',
-    industry: 'Technology',
-    description: 'A leading SaaS platform that needed a complete brand overhaul and digital marketing strategy to penetrate new B2B markets.',
-    services: ['Brand Strategy', 'Paid Ads', 'Web Development'],
+    id: 'case-study-1',
+    metric: '300%',
+    metricLabel: 'Increase in Qualified Leads',
+    title: 'Transforming a Legacy Brand',
+    description: 'We took a 20-year-old traditional business and completely revamped their digital presence, resulting in unprecedented inbound inquiries within 90 days.',
+    shift: 'From purely offline word-of-mouth → Predictable online revenue engine.',
+    tags: ['Brand Strategy', 'Performance Marketing', 'Lead Generation']
   },
   {
-    name: 'RetailMax',
-    industry: 'E-Commerce',
-    description: 'Fast-growing D2C brand seeking to scale their social media presence and optimize conversion funnels across platforms.',
-    services: ['Social Media', 'Content Creation', 'Performance Marketing'],
+    id: 'case-study-2',
+    metric: '10x',
+    metricLabel: 'Social Engagement Growth',
+    title: 'A New Voice for Retail',
+    description: 'Through targeted content creation and consistent community management, we helped this rising retail star dominate their niche on Instagram.',
+    shift: 'From sporadic posts → A cohesive, community-driven social brand.',
+    tags: ['Content', 'Social Media', 'Brand Growth']
   },
   {
-    name: 'Luxora Living',
-    industry: 'Luxury Lifestyle',
-    description: 'Premium lifestyle brand requiring sophisticated visual identity and influencer marketing campaigns.',
-    services: ['Visual Identity', 'Influencer Marketing', 'Video Production'],
+    id: 'case-study-3',
+    metric: '50k+',
+    metricLabel: 'New Monthly Site Visitors',
+    title: 'Scaling D2C E-commerce',
+    description: 'A comprehensive performance marketing overhaul combined with conversion rate optimization led to record-breaking sales months.',
+    shift: 'From high bounce rates → A high-converting digital storefront.',
+    tags: ['Performance Marketing', 'Brand Growth']
   },
   {
-    name: 'Greenfield Co.',
-    industry: 'Sustainability',
-    description: 'Eco-conscious startup aiming to build brand awareness and community engagement through purpose-driven content.',
-    services: ['Brand Growth', 'Community Building', 'Content Strategy'],
-  },
-  {
-    name: 'Meridian Labs',
-    industry: 'Healthcare',
-    description: 'Health-tech company needing a modern web presence and targeted lead generation campaigns.',
-    services: ['UI/UX Design', 'Web Development', 'Lead Generation'],
-  },
-  {
-    name: 'Atlas Digital',
-    industry: 'Finance',
-    description: 'Fintech startup requiring comprehensive digital marketing and brand positioning in a competitive market.',
-    services: ['Digital Marketing', 'Brand Positioning', 'SEO'],
-  },
+    id: 'case-study-4',
+    metric: 'Top 3',
+    metricLabel: 'Market Positioning',
+    title: 'B2B Authority Building',
+    description: 'We helped a specialized B2B firm articulate their unique value proposition, elevating them from a vendor to an industry thought leader.',
+    shift: 'From price competing → Premium market positioning.',
+    tags: ['Brand Strategy', 'Content']
+  }
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
 
 export default function ClientsPage() {
   return (
-    <div className="min-h-screen">
-      <section className="py-20 sm:py-32 bg-dark text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <span className="text-accent uppercase tracking-widest text-xs sm:text-sm font-semibold">Our Clients</span>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-4 tracking-tight">Brands We&apos;ve Helped Grow</h1>
-          <p className="text-gray-400 mt-3 sm:mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed px-2">
-            Discover how we&apos;ve partnered with ambitious brands across industries to drive growth, enhance visibility, and create lasting impact in the digital landscape.
-          </p>
-        </div>
+    <main>
+      <section className="py-24 sm:py-32 bg-dark text-center">
+        <h1 className="editorial-heading text-4xl sm:text-5xl md:text-6xl text-white uppercase">
+          OUR WORK
+        </h1>
+        <p className="text-gray-400 mt-4 font-body text-lg max-w-2xl mx-auto">
+          Selected NovaFrames growth stories.
+        </p>
       </section>
 
-      <section className="py-12 sm:py-24 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            {clients.map((client, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-surface-alt border border-gray-100 rounded-2xl p-6 sm:p-8 hover:shadow-xl hover:border-accent/20 transition-all duration-300 flex flex-col h-full"
-              >
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-txt-primary">{client.name}</h3>
-                  <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-accent/10 text-accent text-xs font-medium rounded-full mt-2">
-                    {client.industry}
+      <section className="bg-surface py-16 sm:py-24">
+        <div className="max-w-6xl mx-auto px-6 space-y-12 sm:space-y-16">
+          {caseStudies.map((study, index) => (
+            <motion.div
+              key={study.id}
+              id={study.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-surface-alt border border-gray-100 rounded-2xl p-6 sm:p-8 md:p-10"
+            >
+              <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+                <div className="md:col-span-1 border-b md:border-b-0 md:border-r border-gray-200 pb-8 md:pb-0 md:pr-8">
+                  <span className="font-display text-5xl sm:text-6xl font-bold text-accent">
+                    {study.metric}
                   </span>
-                  <p className="text-txt-muted mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed flex-grow">
-                    {client.description}
+                  <p className="font-body text-sm font-semibold text-txt-primary mt-2 uppercase tracking-wide">
+                    {study.metricLabel}
                   </p>
                 </div>
-                <div className="mt-auto pt-5 sm:pt-6">
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {client.services.map((service, idx) => (
-                      <span key={idx} className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-surface-muted text-txt-secondary text-xs rounded-full">
-                        {service}
+                <div className="md:col-span-2">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-txt-primary mb-4">
+                    {study.title}
+                  </h3>
+                  <p className="font-body text-base text-txt-secondary leading-relaxed mb-6">
+                    {study.description}
+                  </p>
+                  <p className="font-body text-sm text-accent-glow font-medium mb-6 p-4 bg-accent/5 rounded-lg border border-accent/10">
+                    <span className="font-bold text-accent">THE SHIFT:</span> {study.shift}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {study.tags.map(tag => (
+                      <span key={tag} className="text-xs font-semibold uppercase tracking-wider px-3 py-1 bg-white border border-gray-200 rounded-full text-txt-muted">
+                        {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -1,84 +1,91 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { Megaphone, TrendingUp, Palette, Code } from 'lucide-react'
+'use client';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const services = [
   {
-    title: 'Digital Marketing',
-    description: 'Data-driven campaigns across paid social, search, and programmatic channels that maximize ROI and scale revenue.',
-    icon: Megaphone,
+    number: "01",
+    title: "BRAND POSITIONING",
+    desc: "We define what makes your brand different — and build a digital identity around it."
   },
   {
-    title: 'Brand Growth & Performance',
-    description: 'Strategic brand positioning, performance marketing, and growth frameworks that turn startups into market leaders.',
-    icon: TrendingUp,
+    number: "02",
+    title: "CONTENT",
+    desc: "Reels, campaigns, storytelling and visual experiences designed to earn attention."
   },
   {
-    title: 'Graphic Design & Visual Identity',
-    description: 'Stunning visual systems, brand guidelines, social media creatives, and print collateral that demand attention.',
-    icon: Palette,
+    number: "03",
+    title: "SOCIAL MEDIA",
+    desc: "We build communities, not just follower counts."
   },
   {
-    title: 'Website Development & UI/UX',
-    description: 'Conversion-optimized websites and apps with pixel-perfect UI/UX design, built on modern tech stacks.',
-    icon: Code,
+    number: "04",
+    title: "PERFORMANCE MARKETING",
+    desc: "Strategic paid campaigns designed around enquiries, customers and growth."
   },
-]
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
+  {
+    number: "05",
+    title: "LEAD GENERATION",
+    desc: "We create systems that turn digital attention into genuine business opportunities."
   },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
+  {
+    number: "06",
+    title: "BRAND GROWTH",
+    desc: "A combination of strategy, creativity and performance built around your business goals."
+  }
+];
 
 export default function Services() {
-  return (
-    <section id="services" className="py-16 sm:py-24 bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <h2 className="text-xs sm:text-sm uppercase tracking-widest text-accent font-semibold">What We Do</h2>
-          <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-txt-primary mt-2 tracking-tight">Services Built to Scale</h3>
-          <p className="text-txt-muted mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed">
-            We deliver end-to-end digital solutions designed to accelerate your growth and elevate your brand presence.
-          </p>
-        </div>
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
-        <motion.div
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  return (
+    <section id="services" className="py-20 sm:py-28 md:py-32 bg-dark" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="editorial-heading font-display font-bold uppercase leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-14 sm:mb-20"
+        >
+          FROM ATTENTION TO ACTION.
+        </motion.h2>
+
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 sm:gap-y-14"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mt-10 sm:mt-16"
+          animate={inView ? "visible" : "hidden"}
         >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
+          {services.map((s, i) => (
+            <motion.div 
+              key={i} 
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className="bg-surface-alt border border-gray-100 rounded-2xl p-6 sm:p-8 hover:shadow-xl hover:border-accent/20 transition-all duration-300 flex flex-col justify-between"
+              className="group border-l-2 border-transparent hover:border-accent pl-0 hover:pl-4 transition-all duration-300 transform hover:translate-x-1"
             >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6">
-                  <service.icon size={28} strokeWidth={2} />
-                </div>
-                <h4 className="text-lg sm:text-xl font-bold text-txt-primary">{service.title}</h4>
-                <p className="text-txt-muted mt-2 sm:mt-3 text-sm leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
+              <h3 className="font-display text-base sm:text-lg font-bold text-white uppercase tracking-wide flex items-center gap-2">
+                <span className="text-accent">{s.number}</span> — {s.title}
+              </h3>
+              <p className="font-body text-sm sm:text-base text-gray-400 mt-3 sm:mt-4 leading-relaxed">
+                {s.desc}
+              </p>
             </motion.div>
           ))}
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

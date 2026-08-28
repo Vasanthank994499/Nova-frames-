@@ -1,95 +1,113 @@
 'use client';
-
-import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FolderCheck, Film, Rocket, Users } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
 
-interface MetricProps {
-  icon: React.ElementType;
-  target: number;
-  label: string;
-}
-
-const easeOutExpo = (t: number): number => {
-  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-};
-
-const MetricCard = ({ icon: Icon, target, label }: MetricProps) => {
+function Counter({ end, suffix, duration = 2000, isK = false, isComma = false }: { end: number, suffix: string, duration?: number, isK?: boolean, isComma?: boolean }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const inView = useInView(nodeRef, { once: true, margin: "-50px" });
 
   useEffect(() => {
-    if (!isInView) return;
-
+    if (!inView) return;
+    
     let startTime: number;
-    const duration = 2000; // 2 seconds
+    let animationFrame: number;
 
-    const animateCount = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      const percentage = Math.min(progress / duration, 1);
+    const easeOutExpo = (t: number): number => {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    };
+
+    const animate = (time: number) => {
+      if (!startTime) startTime = time;
+      const progress = time - startTime;
+      const percent = Math.min(progress / duration, 1);
       
-      // Easing function for smoother counter
-      const easedPercentage = easeOutExpo(percentage);
-      
-      setCount(Math.floor(easedPercentage * target));
+      const easedProgress = easeOutExpo(percent);
+      setCount(Math.floor(end * easedProgress));
 
       if (progress < duration) {
-        requestAnimationFrame(animateCount);
+        animationFrame = requestAnimationFrame(animate);
       } else {
-        setCount(target);
+        setCount(end);
       }
     };
 
-    requestAnimationFrame(animateCount);
-  }, [isInView, target]);
+    animationFrame = requestAnimationFrame(animate);
+    
+    return () => cancelAnimationFrame(animationFrame);
+  }, [inView, end, duration]);
+
+  const displayValue = isK ? `${count/1000}` : (isComma ? count.toLocaleString() : count.toString());
 
   return (
-    <div ref={ref} className="text-center p-5 sm:p-6 md:p-8 bg-dark-card/60 backdrop-blur-sm rounded-2xl border border-white/5 flex flex-col justify-center items-center">
-      <div className="flex justify-center mb-3 sm:mb-5">
-        <Icon className="text-accent w-6 h-6 sm:w-8 sm:h-8" />
-      </div>
-      <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2 text-white tracking-tight">
-        {count}+
-      </div>
-      <div className="text-gray-400 text-xs sm:text-sm font-medium">
-        {label}
-      </div>
-    </div>
+    <span ref={nodeRef}>
+      {displayValue}{suffix}
+    </span>
   );
-};
+}
 
 export default function Metrics() {
-  const metrics = [
-    { icon: FolderCheck, target: 120, label: 'Projects Completed' },
-    { icon: Film, target: 300, label: 'Video Reels & Ads' },
-    { icon: Rocket, target: 50, label: 'Brands Scaled' },
-    { icon: Users, target: 25, label: 'Active Retainer Clients' },
-  ];
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="metrics" className="py-16 sm:py-24 bg-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center">
-          <span className="text-accent font-medium tracking-wider uppercase text-xs sm:text-sm">
-            By the Numbers
-          </span>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mt-2 sm:mt-4 tracking-tight">
-            Impact That Speaks
-          </h2>
+    <section id="metrics" className="py-16 sm:py-20 md:py-24 bg-dark border-y border-white/5">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="section-label uppercase text-accent text-xs sm:text-sm font-bold tracking-widest text-center mb-12 sm:mb-16"
+        >
+          REAL BRANDS. REAL GROWTH.
+        </motion.p>
+        
+        <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
+          <div className="flex flex-col items-center">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              <Counter end={20} suffix="+" />
+            </h3>
+            <p className="font-body text-sm sm:text-base text-txt-muted mt-2 sm:mt-3">
+              Brands Built & Supported
+            </p>
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              <Counter end={5} suffix="+" />
+            </h3>
+            <p className="font-body text-sm sm:text-base text-txt-muted mt-2 sm:mt-3">
+              Industries Covered
+            </p>
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              <Counter end={1000} suffix="+" isComma={true} />
+            </h3>
+            <p className="font-body text-sm sm:text-base text-txt-muted mt-2 sm:mt-3">
+              Leads Generated
+            </p>
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              <Counter end={10000} suffix="K+" isK={true} />
+            </h3>
+            <p className="font-body text-sm sm:text-base text-txt-muted mt-2 sm:mt-3">
+              Organic Audience Growth
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 md:gap-8 mt-10 sm:mt-16">
-          {metrics.map((metric, index) => (
-            <MetricCard
-              key={index}
-              icon={metric.icon}
-              target={metric.target}
-              label={metric.label}
-            />
-          ))}
-        </div>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center text-txt-muted text-sm mt-12 sm:mt-16 italic"
+        >
+          Selected results from our client partnerships.
+        </motion.p>
       </div>
     </section>
   );

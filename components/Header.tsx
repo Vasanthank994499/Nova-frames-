@@ -1,20 +1,19 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import MobileNav from './MobileNav';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -22,55 +21,61 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-300 ease-in-out ${
-          isScrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-lg glass-dark' : 'bg-transparent'
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-dark/80 backdrop-blur-lg border-b border-white/5 py-2' : 'bg-transparent py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-          <Link href="/" className="z-50 flex items-center gap-2.5 text-lg sm:text-xl font-bold text-surface tracking-tight group">
-            <img 
-              src="/logo.png" 
-              alt="Nova Frames Logo" 
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shadow-sm group-hover:scale-105 transition-transform duration-300"
-            />
-            <span>
-              Nova<span className="text-accent mx-0.5 mb-1 text-2xl leading-[0]">.</span>Frames
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <img src="/logo.png" alt="Nova Frames Logo" className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-cover" />
+            <span className="font-display text-base sm:text-lg font-bold text-white uppercase tracking-[0.15em]">
+              NOVAFRAMES
             </span>
           </Link>
 
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <Link href="/#about" className="font-body text-sm text-gray-300 hover:text-white transition-colors uppercase tracking-wider">
+              About
+            </Link>
+            <Link href="/#services" className="font-body text-sm text-gray-300 hover:text-white transition-colors uppercase tracking-wider">
+              Services
+            </Link>
+            <Link href="/#case-studies" className="font-body text-sm text-gray-300 hover:text-white transition-colors uppercase tracking-wider">
+              Work
+            </Link>
+            <Link href="/#leadership" className="font-body text-sm text-gray-300 hover:text-white transition-colors uppercase tracking-wider">
+              Team
+            </Link>
+            <Link
+              href="/contact"
+              className="bg-accent hover:bg-accent-glow text-white px-5 py-2 rounded-full text-sm font-semibold ml-2 transition-colors"
+            >
+              Start a Conversation →
+            </Link>
+          </nav>
+
+          {/* Mobile Nav Toggle */}
           <button
-            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-            className="z-50 text-surface p-2 sm:p-2.5 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40"
-            aria-label="Toggle Navigation"
+            className="lg:hidden text-white p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <AnimatePresence mode="wait">
-              {isMobileNavOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X size={26} className="sm:w-7 sm:h-7" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu size={26} className="sm:w-7 sm:h-7" />
-                </motion.div>
-              )}
+              <motion.div
+                key={isMobileMenuOpen ? 'close' : 'open'}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
             </AnimatePresence>
           </button>
         </div>
       </header>
 
-      <MobileNav isOpen={isMobileNavOpen} onClose={() => setIsMobileNavOpen(false)} />
+      <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </>
   );
 }

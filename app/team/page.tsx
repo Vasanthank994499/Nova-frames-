@@ -1,154 +1,140 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Instagram } from 'lucide-react';
+import Link from 'next/link';
 
 const team = [
   {
-    name: 'Arjun Mehta',
+    name: 'HARI PRASATH',
     role: 'Founder & CEO',
-    department: 'Leadership',
-    skills: ['Strategy', 'Vision'],
+    initials: 'HP',
     gradient: 'from-accent to-accent-glow',
-  },
-  {
-    name: 'Nisha Kapoor',
-    role: 'Co-Founder & MD',
+    bio: 'NovaFrames was built with a simple belief: Small and ambitious businesses deserve the same level of creative thinking and strategic marketing as the biggest brands. What started with content evolved into something bigger — a growth-focused agency helping brands build their presence, reach the right audience and create measurable business impact.',
     department: 'Leadership',
-    skills: ['Operations', 'Growth'],
+    skills: ['Brand Strategy', 'Business Growth', 'Creative Direction', 'Team Leadership'],
+  },
+  {
+    name: 'T. PREMALATHA',
+    role: 'Co-Founder, Performance Marketing',
+    initials: 'TP',
     gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    name: 'Sarah Mitchell',
-    role: 'Lead Editor',
-    department: 'Production',
-    skills: ['Premiere Pro', 'DaVinci'],
-    gradient: 'from-violet-500 to-fuchsia-500',
-  },
-  {
-    name: 'James Carter',
-    role: 'Motion Designer',
-    department: 'Production',
-    skills: ['After Effects', '3D'],
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Content Strategist',
-    department: 'Strategy',
-    skills: ['SEO', 'Analytics'],
-    gradient: 'from-emerald-500 to-teal-500',
-  },
-  {
-    name: 'Alex Rivera',
-    role: 'Creative Director',
-    department: 'Design',
-    skills: ['Figma', 'Branding'],
-    gradient: 'from-orange-500 to-amber-500',
-  },
-  {
-    name: 'Rahul Verma',
-    role: 'Full-Stack Developer',
-    department: 'Engineering',
-    skills: ['React', 'Node.js'],
-    gradient: 'from-rose-500 to-red-500',
-  },
-  {
-    name: 'Maya Chen',
-    role: 'Performance Marketer',
-    department: 'Marketing',
-    skills: ['Google Ads', 'Meta Ads'],
-    gradient: 'from-sky-500 to-blue-500',
+    bio: 'Leading the performance side of NovaFrames, Premalatha focuses on turning creative campaigns into measurable outcomes. From audience targeting and campaign strategy to optimisation and lead generation, she helps ensure that great creative reaches the right people — and drives action.',
+    department: 'Performance',
+    skills: ['Performance Marketing', 'Lead Generation', 'Campaign Strategy', 'Analytics'],
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
-  },
+    transition: { duration: 0.6, delay: i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
 };
-
-function getInitials(name: string) {
-  return name.split(' ').map((n) => n[0]).join('');
-}
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen">
-      <section className="py-20 sm:py-32 bg-dark text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <span className="text-accent uppercase tracking-widest text-xs sm:text-sm font-semibold">Our Team</span>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-4 tracking-tight">The People Behind the Pixels</h1>
-          <p className="text-gray-400 mt-3 sm:mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed px-2">
-            Meet the talented individuals who drive our agency forward. A diverse group of strategists, creatives, and technologists united by a passion for digital excellence.
+    <>
+      {/* Hero Banner */}
+      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 bg-dark text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="editorial-heading text-4xl sm:text-5xl md:text-6xl text-white">
+            OUR TEAM
+          </h1>
+          <p className="font-body text-base sm:text-lg text-gray-400 mt-4 max-w-2xl mx-auto">
+            The people behind NovaFrames — driven by creativity, strategy and measurable results.
           </p>
         </div>
       </section>
 
-      <section className="py-12 sm:py-24 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            {team.map((member, index) => (
+      {/* Team Grid */}
+      <section className="py-16 sm:py-24 bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+            {team.map((member, i) => (
               <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-surface-alt rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-100"
+                key={member.name}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                className="bg-surface-alt border border-gray-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 hover:border-accent/20 transition-colors duration-300"
               >
-                <div className={`h-40 sm:h-48 bg-gradient-to-br ${member.gradient} flex items-center justify-center`}>
-                  <span className="text-2xl sm:text-3xl font-bold text-white/70">
-                    {getInitials(member.name)}
+                {/* Avatar */}
+                <div
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br ${member.gradient} flex items-center justify-center`}
+                >
+                  <span className="text-white text-xl sm:text-2xl font-display font-bold">
+                    {member.initials}
                   </span>
                 </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-txt-primary">{member.name}</h3>
-                    <p className="text-accent text-xs sm:text-sm font-medium mt-0.5 sm:mt-1">{member.role}</p>
-                    <span className="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs rounded-full mt-2 font-medium">
-                      {member.department}
+
+                {/* Name & Role */}
+                <h2 className="font-display text-xl sm:text-2xl font-bold text-txt-primary uppercase tracking-wide mt-5 sm:mt-6">
+                  {member.name}
+                </h2>
+                <p className="font-body text-sm sm:text-base text-accent mt-1">{member.role}</p>
+
+                {/* Department Badge */}
+                <span className="inline-block mt-3 px-3 py-1 rounded-full border border-accent/20 text-xs text-accent font-body uppercase tracking-wider">
+                  {member.department}
+                </span>
+
+                {/* Bio */}
+                <p className="font-body text-sm sm:text-base text-txt-muted mt-4 sm:mt-6 leading-relaxed">
+                  {member.bio}
+                </p>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2 mt-5 sm:mt-6">
+                  {member.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full bg-surface-muted text-xs text-txt-secondary font-body"
+                    >
+                      {skill}
                     </span>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-gray-100">
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {member.skills.map((skill, idx) => (
-                        <span key={idx} className="px-2 py-0.5 bg-surface-muted text-txt-muted text-xs rounded">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-2 mt-4">
-                      <a href="#" className="p-1 text-txt-muted hover:text-accent transition-colors" aria-label={`${member.name}'s LinkedIn`}>
-                        <Linkedin className="w-4 h-4" />
-                      </a>
-                      <a href="#" className="p-1 text-txt-muted hover:text-accent transition-colors" aria-label={`${member.name}'s Twitter`}>
-                        <Twitter className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
+                  ))}
+                </div>
+
+                {/* Social */}
+                <div className="flex gap-3 mt-6">
+                  <Link
+                    href="#"
+                    className="w-9 h-9 rounded-full bg-surface-muted flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300"
+                    aria-label={`${member.name} LinkedIn`}
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="#"
+                    className="w-9 h-9 rounded-full bg-surface-muted flex items-center justify-center text-txt-muted hover:bg-accent hover:text-white transition-colors duration-300"
+                    aria-label={`${member.name} Instagram`}
+                  >
+                    <Instagram className="w-4 h-4" />
+                  </Link>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-16 sm:mt-20">
+            <p className="font-body text-base sm:text-lg text-txt-muted mb-6">
+              Interested in working with us?
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block bg-accent hover:bg-accent-glow text-white px-8 py-4 rounded-full text-sm sm:text-base font-semibold uppercase tracking-wider transition-colors duration-300"
+            >
+              START A CONVERSATION →
+            </Link>
+          </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

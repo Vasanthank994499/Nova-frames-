@@ -1,26 +1,33 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const jakarta = Plus_Jakarta_Sans({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-syne",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Nova Frames | Digital Marketing Agency",
+  title: "NovaFrames — Brand Growth Studio",
   description:
-    "We craft high-impact digital experiences, scale brands, and produce scroll-stopping content that converts.",
+    "NovaFrames is a brand growth studio combining strategy, content and performance marketing to build brands that people notice, remember and choose.",
   keywords: [
+    "brand growth studio",
     "digital marketing",
-    "brand growth",
-    "web development",
-    "graphic design",
-    "UI/UX",
-    "video production",
+    "performance marketing",
+    "content creation",
+    "brand strategy",
+    "lead generation",
+    "social media marketing",
   ],
   icons: {
     icon: "/logo.png",
@@ -34,8 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body className="font-sans text-txt-primary bg-surface antialiased">
+    <html lang="en" className={`${syne.variable} ${inter.variable}`}>
+      <body className="font-body text-txt-primary bg-surface antialiased">
         <Header />
         <main>{children}</main>
         <Footer />
