@@ -169,7 +169,7 @@ export default function ClientsPage() {
                 Our Brand Network
               </span>
               <h3 className="text-2xl sm:text-4xl font-extrabold text-txt-primary mt-2 uppercase tracking-tight">
-                Trusted by 18+ Growing Brands
+                Trusted by 17+ Growing Brands
               </h3>
               <p className="text-txt-muted text-xs sm:text-sm mt-2 max-w-xl mx-auto">
                 From retail and fashion to real estate and healthcare, partnering with businesses across industries.
@@ -195,7 +195,6 @@ export default function ClientsPage() {
                 { name: 'Radiant Windows', logo: '/logos/radiant-windows.png' },
                 { name: 'Tiny Joys', logo: '/logos/tiny-joys.png' },
                 { name: 'Vilvam', logo: '/logos/vilvam.png' },
-                { name: 'Vogue Apparels', logo: '/logos/vogue-apparels.png' },
               ].map((partner, pIdx) => (
                 <div
                   key={pIdx}

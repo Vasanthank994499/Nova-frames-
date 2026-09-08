@@ -23,7 +23,6 @@ const brands: Brand[] = [
   { name: 'Radiant Windows', logo: '/logos/radiant-windows.png' },
   { name: 'Tiny Joys', logo: '/logos/tiny-joys.png' },
   { name: 'Vilvam', logo: '/logos/vilvam.png' },
-  { name: 'Vogue Apparels', logo: '/logos/vogue-apparels.png' },
 ];
 
 export default function ClientMarquee() {
