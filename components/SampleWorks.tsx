@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Eye, Sparkles, Instagram, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Pause, Eye, Sparkles, Instagram, ArrowUpRight, ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 
 interface Reel {
@@ -15,6 +15,7 @@ interface Reel {
   duration: string;
   engagement: string;
   instagramUrl?: string;
+  videoSrc?: string;
 }
 
 const reels: Reel[] = [
@@ -28,6 +29,7 @@ const reels: Reel[] = [
     duration: '0:42',
     engagement: '11.3K Likes',
     instagramUrl: 'https://www.instagram.com/reel/DcTbDleg2oq/?stkn=dW1sMjJsdHUwbnI1',
+    videoSrc: '/videos/umbrella-homes.mp4',
   },
   {
     id: 2,
@@ -38,32 +40,35 @@ const reels: Reel[] = [
     gradient: 'from-amber-950 via-yellow-900/60 to-indigo-950',
     duration: '0:30',
     engagement: '14.2K Likes',
+    videoSrc: '/videos/sri-bal-tex.mp4',
   },
   {
     id: 3,
-    client: 'Sri Varagi Promoters',
-    title: 'Luxury Gated Community Walkthrough',
-    category: 'Real Estate / Tour',
+    client: 'Sri Bal Tex',
+    title: 'B2B Lead Generation Strategy',
+    category: 'Textiles & B2B',
     views: '85K+ Views',
     gradient: 'from-blue-950 via-slate-900/80 to-indigo-950',
     duration: '0:45',
     engagement: '8.9K Likes',
+    videoSrc: '/videos/bal-tex.mp4',
   },
   {
     id: 4,
     client: 'Sagar Readymades',
-    title: 'Festive Ethnic & Silk Trend Reel',
+    title: 'Festive Sales & Store Walk-in Drive',
     category: 'Fashion & Retail',
     views: '250K+ Views',
     gradient: 'from-rose-950 via-purple-900/70 to-indigo-950',
     duration: '0:25',
     engagement: '28.4K Likes',
+    videoSrc: '/videos/sagar-readymades.mp4',
   },
   {
     id: 5,
-    client: 'Bal Tex Apparels',
-    title: 'High-Fashion Summer D2C Campaign',
-    category: 'D2C Apparel',
+    client: 'Sri Varagi Promoters',
+    title: 'Luxury Gated Community Walkthrough',
+    category: 'Real Estate / Tour',
     views: '160K+ Views',
     gradient: 'from-violet-950 via-fuchsia-900/60 to-indigo-950',
     duration: '0:20',
@@ -81,13 +86,135 @@ const reels: Reel[] = [
   },
 ];
 
-export default function SampleWorks() {
-  const [playingId, setPlayingId] = useState<number | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+function ReelCard({ reel }: { reel: Reel }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlay = (id: number) => {
-    setPlayingId(playingId === id ? null : id);
+  const togglePlay = () => {
+    if (reel.videoSrc && videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play().catch(() => {});
+        setIsPlaying(true);
+      }
+    } else {
+      setIsPlaying(!isPlaying);
+    }
   };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <div className="w-[270px] sm:w-[310px] md:w-[330px] flex-shrink-0 snap-center bg-dark-card/90 border border-white/5 rounded-3xl p-4 sm:p-5 hover:border-accent/30 transition-all duration-300 shadow-xl group flex flex-col justify-between">
+      {/* 9:15 Smartphone Vertical Reel Frame */}
+      <div
+        onClick={togglePlay}
+        className={`w-full aspect-[9/15] rounded-2xl overflow-hidden relative bg-gradient-to-br ${reel.gradient} cursor-pointer group-hover:shadow-2xl group-hover:shadow-accent/20 transition-all duration-500 border border-white/10 flex flex-col justify-between p-4`}
+      >
+        {/* Real Video Element if available */}
+        {reel.videoSrc && (
+          <video
+            ref={videoRef}
+            src={reel.videoSrc}
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            playsInline
+            loop
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onEnded={() => setIsPlaying(false)}
+          />
+        )}
+
+        {/* Video Overlay Tint */}
+        <div className={`absolute inset-0 z-[1] transition-opacity duration-300 ${isPlaying ? 'bg-black/10' : 'bg-black/35 group-hover:bg-black/20'}`} />
+
+        {/* Top Bar: Category Pill & Views Badge */}
+        <div className="flex items-center justify-between z-10 pointer-events-none">
+          <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white/90 text-[11px] font-medium border border-white/10 shadow-sm">
+            {reel.category}
+          </span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/40 backdrop-blur-md text-white text-[11px] font-bold border border-accent/40 shadow-sm">
+            <Eye className="w-3 h-3" />
+            <span>{reel.views}</span>
+          </span>
+        </div>
+
+        {/* Center Play/Pause Button (visible when paused or hover) */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center text-white relative transition-transform duration-300 group-hover:scale-110 shadow-xl border border-white/20">
+              <Play className="w-7 h-7 sm:w-8 sm:h-8 ml-1" />
+            </div>
+          </div>
+        )}
+
+        {/* Bottom Bar: Client Info & Controls */}
+        <div className="z-10 bg-black/70 backdrop-blur-md rounded-xl p-3 border border-white/10 shadow-md">
+          <div className="flex items-center justify-between text-xs text-white/90 font-medium">
+            <span className="font-semibold text-white truncate max-w-[170px]">{reel.client}</span>
+            <div className="flex items-center gap-2">
+              {reel.videoSrc && isPlaying && (
+                <button
+                  onClick={toggleMute}
+                  className="p-1 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  aria-label={isMuted ? "Unmute" : "Mute"}
+                >
+                  {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+                </button>
+              )}
+              <span className="text-[11px] text-accent-light flex-shrink-0">{reel.duration}</span>
+            </div>
+          </div>
+          <div className="flex items-center justify-between text-[11px] text-gray-400 mt-1">
+            <span>{reel.engagement}</span>
+            <div className="flex items-end gap-0.5 h-3">
+              <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-3 animate-pulse' : 'h-1.5'}`} />
+              <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-2 animate-pulse delay-75' : 'h-2.5'}`} />
+              <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-3.5 animate-pulse delay-150' : 'h-2'}`} />
+              <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-2 animate-pulse delay-100' : 'h-1'}`} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Card Title & Client Subtitle */}
+      <div className="mt-4 pt-1 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-accent transition-colors line-clamp-1">
+            {reel.title}
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-400 mt-0.5 truncate">
+            Client Campaign • {reel.client}
+          </p>
+        </div>
+        {reel.instagramUrl && (
+          <a
+            href={reel.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-1.5 rounded-lg bg-white/5 hover:bg-accent/20 text-gray-400 hover:text-accent transition-colors shrink-0"
+            title="Watch on Instagram"
+            aria-label={`Watch ${reel.title} on Instagram`}
+          >
+            <Instagram className="w-4 h-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function SampleWorks() {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -145,88 +272,9 @@ export default function SampleWorks() {
           ref={scrollRef}
           className="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 carousel-track"
         >
-          {reels.map((reel) => {
-            const isPlaying = playingId === reel.id;
-
-            return (
-              <div
-                key={reel.id}
-                className="w-[270px] sm:w-[310px] md:w-[330px] flex-shrink-0 snap-center bg-dark-card/90 border border-white/5 rounded-3xl p-4 sm:p-5 hover:border-accent/30 transition-all duration-300 shadow-xl group flex flex-col justify-between"
-              >
-                {/* 9:16 Smartphone Vertical Reel Frame */}
-                <div
-                  onClick={() => togglePlay(reel.id)}
-                  className={`w-full aspect-[9/15] rounded-2xl overflow-hidden relative bg-gradient-to-br ${reel.gradient} cursor-pointer group-hover:shadow-2xl group-hover:shadow-accent/20 transition-all duration-500 border border-white/10 flex flex-col justify-between p-4`}
-                >
-                  {/* Top Bar: Category Pill & Views Badge */}
-                  <div className="flex items-center justify-between z-10">
-                    <span className="px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white/90 text-[11px] font-medium border border-white/10">
-                      {reel.category}
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/30 backdrop-blur-md text-white text-[11px] font-bold border border-accent/40 shadow-sm">
-                      <Eye className="w-3 h-3" />
-                      <span>{reel.views}</span>
-                    </span>
-                  </div>
-
-                  {/* Center Play/Pause Button */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white relative transition-transform duration-300 ${isPlaying ? 'scale-105 bg-accent/40' : 'group-hover:scale-110'}`}>
-                      {isPlaying && (
-                        <span className="absolute inset-0 rounded-full animate-ping bg-accent/40" />
-                      )}
-                      {isPlaying ? (
-                        <Pause className="w-7 h-7 sm:w-8 sm:h-8" />
-                      ) : (
-                        <Play className="w-7 h-7 sm:w-8 sm:h-8 ml-1" />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bottom Bar: Client Info & Sound Waveform */}
-                  <div className="z-10 bg-black/60 backdrop-blur-md rounded-xl p-3 border border-white/10">
-                    <div className="flex items-center justify-between text-xs text-white/80 font-medium">
-                      <span className="font-semibold text-white truncate max-w-[170px]">{reel.client}</span>
-                      <span className="text-[11px] text-accent-light flex-shrink-0">{reel.duration}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-[11px] text-gray-400 mt-1">
-                      <span>{reel.engagement}</span>
-                      <div className="flex items-end gap-0.5 h-3">
-                        <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-3 animate-pulse' : 'h-1.5'}`} />
-                        <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-2 animate-pulse delay-75' : 'h-2.5'}`} />
-                        <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-3.5 animate-pulse delay-150' : 'h-2'}`} />
-                        <span className={`w-0.5 bg-accent rounded-full transition-all ${isPlaying ? 'h-2 animate-pulse delay-100' : 'h-1'}`} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Title & Client Subtitle */}
-                <div className="mt-4 pt-1 flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-accent transition-colors line-clamp-1">
-                      {reel.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-400 mt-0.5 truncate">
-                      Client Campaign • {reel.client}
-                    </p>
-                  </div>
-                  {reel.instagramUrl && (
-                    <a
-                      href={reel.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg bg-white/5 hover:bg-accent/20 text-gray-400 hover:text-accent transition-colors shrink-0"
-                      title="Watch on Instagram"
-                      aria-label={`Watch ${reel.title} on Instagram`}
-                    >
-                      <Instagram className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          {reels.map((reel) => (
+            <ReelCard key={reel.id} reel={reel} />
+          ))}
         </div>
 
         {/* Footer Actions */}
