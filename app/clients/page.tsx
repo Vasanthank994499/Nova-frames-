@@ -162,6 +162,61 @@ export default function ClientsPage() {
             ))}
           </motion.div>
 
+          {/* All Brand Partners Logo Gallery */}
+          <div className="mt-20 sm:mt-28">
+            <div className="text-center mb-10 sm:mb-14">
+              <span className="text-accent uppercase tracking-[0.2em] text-xs sm:text-sm font-semibold">
+                Our Brand Network
+              </span>
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-txt-primary mt-2 uppercase tracking-tight">
+                Trusted by 18+ Growing Brands
+              </h3>
+              <p className="text-txt-muted text-xs sm:text-sm mt-2 max-w-xl mx-auto">
+                From retail and fashion to real estate and healthcare, partnering with businesses across industries.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+              {[
+                { name: 'Sree Balaji Jewellers', logo: '/logos/sree-balaji-jewellers.png' },
+                { name: 'Sri Varagi Promoters', logo: '/logos/varaghi-promoters.png' },
+                { name: 'Umbrella Homes', logo: '/logos/umbrella-homes.jpg' },
+                { name: 'Aara Designers', logo: '/logos/aara-designers.png' },
+                { name: 'Vasthiram', logo: '/logos/vasthiram.png' },
+                { name: 'Sleek', logo: '/logos/sleek.png' },
+                { name: 'Sagar Readymades', logo: '/logos/sagar.png' },
+                { name: 'Bal Tex', logo: '/logos/bal-tex.png' },
+                { name: 'Merry Berry', logo: '/logos/merry-berry.png' },
+                { name: 'Chennai Fitness', logo: '/logos/chennai-fitness.png' },
+                { name: 'Detailing Mafia', logo: '/logos/detailing-mafia.png' },
+                { name: 'Anish Sarees', logo: '/logos/anish-sarees.png' },
+                { name: 'Nira Bangles', logo: '/logos/nira-bangles.png' },
+                { name: 'Parimalam Tyres', logo: '/logos/parimalam-tyres.png' },
+                { name: 'Radiant Windows', logo: '/logos/radiant-windows.png' },
+                { name: 'Tiny Joys', logo: '/logos/tiny-joys.png' },
+                { name: 'Vilvam', logo: '/logos/vilvam.png' },
+                { name: 'Vogue Apparels', logo: '/logos/vogue-apparels.png' },
+              ].map((partner, pIdx) => (
+                <div
+                  key={pIdx}
+                  className="bg-surface-alt hover:bg-surface border border-gray-100 hover:border-accent/30 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-all duration-300 group"
+                >
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white p-2 border border-gray-100 shadow-sm flex items-center justify-center overflow-hidden mb-3 group-hover:scale-105 transition-transform">
+                    <img
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      className="w-full h-full object-contain filter contrast-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-semibold text-xs text-txt-primary/80 group-hover:text-txt-primary line-clamp-2">
+                    {partner.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Bottom CTA */}
           <div className="text-center mt-16 sm:mt-24 p-8 sm:p-12 rounded-3xl bg-dark text-white">
             <h3 className="text-2xl sm:text-4xl font-bold">Ready to write your growth story?</h3>
