@@ -36,7 +36,7 @@ const reels: Reel[] = [
     client: 'Sri Varagi Promoters',
     title: 'Luxury Villa & Gated Community Tour',
     category: 'Real Estate / Viral Story',
-    views: '250K+ Views',
+    views: '424K Views',
     gradient: 'from-blue-950 via-slate-900/80 to-indigo-950',
     duration: '0:35',
     engagement: '10.5K Likes',
