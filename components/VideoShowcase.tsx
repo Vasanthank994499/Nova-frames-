@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
@@ -41,21 +41,43 @@ const videos: VideoItem[] = [
   },
 ];
 
-function VideoCard({ video, isVisible, index }: { video: VideoItem; isVisible: boolean; index: number }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+function VideoCard({
+  video,
+  isVisible,
+  index,
+  isPlaying,
+  onPlay,
+  onPause,
+}: {
+  video: VideoItem;
+  isVisible: boolean;
+  index: number;
+  isPlaying: boolean;
+  onPlay: () => void;
+  onPause: () => void;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlay = () => {
-    if (video.src && videoRef.current) {
+  useEffect(() => {
+    if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
+        videoRef.current.play().catch(() => {});
       } else {
-        videoRef.current.play();
-        setIsPlaying(true);
+        videoRef.current.pause();
       }
+    }
+  }, [isPlaying]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      onPause();
     } else {
-      setIsPlaying(!isPlaying);
+      document.querySelectorAll('video').forEach((v) => {
+        if (v !== videoRef.current && !v.paused) {
+          v.pause();
+        }
+      });
+      onPlay();
     }
   };
 
@@ -79,9 +101,20 @@ function VideoCard({ video, isVisible, index }: { video: VideoItem; isVisible: b
             className="w-full h-full object-cover"
             playsInline
             controls={isPlaying}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
+            onPlay={() => {
+              document.querySelectorAll('video').forEach((v) => {
+                if (v !== videoRef.current && !v.paused) {
+                  v.pause();
+                }
+              });
+              onPlay();
+            }}
+            onPause={() => {
+              if (isPlaying) onPause();
+            }}
+            onEnded={() => {
+              onPause();
+            }}
           />
         ) : (
           <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors" />
@@ -114,8 +147,26 @@ function VideoCard({ video, isVisible, index }: { video: VideoItem; isVisible: b
 
 export default function VideoShowcase() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleGlobalPlay = (e: Event) => {
+      const target = e.target as HTMLVideoElement;
+      if (target && target.tagName === 'VIDEO') {
+        document.querySelectorAll('video').forEach((v) => {
+          if (v !== target && !v.paused) {
+            v.pause();
+          }
+        });
+      }
+    };
+    document.addEventListener('play', handleGlobalPlay, true);
+    return () => {
+      document.removeEventListener('play', handleGlobalPlay, true);
+    };
+  }, []);
 
   const minSwipeDistance = 50;
 
@@ -174,6 +225,13 @@ export default function VideoShowcase() {
               video={video}
               isVisible={activeSlide === index}
               index={index}
+              isPlaying={playingVideoId === video.id}
+              onPlay={() => setPlayingVideoId(video.id)}
+              onPause={() => {
+                if (playingVideoId === video.id) {
+                  setPlayingVideoId(null);
+                }
+              }}
             />
           ))}
         </div>

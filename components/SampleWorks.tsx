@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, Eye, Sparkles, Instagram, ArrowUpRight, ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
@@ -91,22 +91,40 @@ const reels: Reel[] = [
   },
 ];
 
-function ReelCard({ reel }: { reel: Reel }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+function ReelCard({
+  reel,
+  isPlaying,
+  onPlay,
+  onPause,
+}: {
+  reel: Reel;
+  isPlaying: boolean;
+  onPlay: () => void;
+  onPause: () => void;
+}) {
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlay = () => {
-    if (reel.videoSrc && videoRef.current) {
+  useEffect(() => {
+    if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
         videoRef.current.play().catch(() => {});
-        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
       }
+    }
+  }, [isPlaying]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      onPause();
     } else {
-      setIsPlaying(!isPlaying);
+      document.querySelectorAll('video').forEach((v) => {
+        if (v !== videoRef.current && !v.paused) {
+          v.pause();
+        }
+      });
+      onPlay();
     }
   };
 
@@ -133,9 +151,20 @@ function ReelCard({ reel }: { reel: Reel }) {
             className="absolute inset-0 w-full h-full object-cover z-0"
             playsInline
             loop
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
+            onPlay={() => {
+              document.querySelectorAll('video').forEach((v) => {
+                if (v !== videoRef.current && !v.paused) {
+                  v.pause();
+                }
+              });
+              onPlay();
+            }}
+            onPause={() => {
+              if (isPlaying) onPause();
+            }}
+            onEnded={() => {
+              onPause();
+            }}
           />
         )}
 
@@ -219,7 +248,25 @@ function ReelCard({ reel }: { reel: Reel }) {
 }
 
 export default function SampleWorks() {
+  const [playingReelId, setPlayingReelId] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleGlobalPlay = (e: Event) => {
+      const target = e.target as HTMLVideoElement;
+      if (target && target.tagName === 'VIDEO') {
+        document.querySelectorAll('video').forEach((v) => {
+          if (v !== target && !v.paused) {
+            v.pause();
+          }
+        });
+      }
+    };
+    document.addEventListener('play', handleGlobalPlay, true);
+    return () => {
+      document.removeEventListener('play', handleGlobalPlay, true);
+    };
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -278,7 +325,17 @@ export default function SampleWorks() {
           className="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 carousel-track"
         >
           {reels.map((reel) => (
-            <ReelCard key={reel.id} reel={reel} />
+            <ReelCard
+              key={reel.id}
+              reel={reel}
+              isPlaying={playingReelId === reel.id}
+              onPlay={() => setPlayingReelId(reel.id)}
+              onPause={() => {
+                if (playingReelId === reel.id) {
+                  setPlayingReelId(null);
+                }
+              }}
+            />
           ))}
         </div>
 
