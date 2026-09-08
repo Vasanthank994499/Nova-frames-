@@ -54,10 +54,11 @@ export default function Globe() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const radius = Math.min(width, height) * 0.36;
+      const isMobile = width < 768;
+      const radius = isMobile ? Math.min(width, height) * 0.65 : Math.min(width, height) * 0.36;
       const cx = width / 2;
       const cy = height / 2;
-      const fov = 400;
+      const fov = isMobile ? 500 : 400;
 
       rotation += 0.0025;
 
