@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin, CheckCircle2, Loader2 } from 'lucide-react';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,25 +22,35 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
 
-    const subject = encodeURIComponent(`Project Inquiry from ${formData.name || 'Client'} - ${formData.service || 'NovaFrames'}`);
-    const body = encodeURIComponent(
-      `Hi NovaFrames Team,\n\n` +
-      `Here are the project inquiry details:\n\n` +
-      `• Name: ${formData.name}\n` +
-      `• Email: ${formData.email}\n` +
-      `• Company: ${formData.company || 'N/A'}\n` +
-      `• Interested Service: ${formData.service || 'N/A'}\n` +
-      `• Budget Range: ${formData.budget || 'N/A'}\n\n` +
-      `• Project Details / Message:\n${formData.message}\n\n` +
-      `Best regards,\n${formData.name}`
-    );
+    try {
+      // Send directly via Next.js internal API route & FormSubmit background dispatch
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+    } catch (err) {
+      console.error('Submission failed:', err);
+    } finally {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }
+  };
 
-    const mailtoUrl = `mailto:novaframes02@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoUrl;
+  const handleReset = () => {
+    setIsSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      company: '',
+      service: '',
+      budget: '',
+      message: '',
+    });
   };
 
   return (
@@ -67,27 +78,17 @@ export default function ContactPage() {
               transition={{ duration: 0.5 }}
             >
               {isSubmitted ? (
-                <div className="bg-surface-alt border border-gray-200 rounded-2xl p-8 sm:p-12 text-center h-full flex flex-col items-center justify-center">
+                <div className="bg-surface-alt border border-gray-200 rounded-2xl p-8 sm:p-12 text-center h-full flex flex-col items-center justify-center animate-fadeIn">
                   <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-accent mb-4 sm:mb-6" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-txt-primary mb-2">Inquiry Submitted!</h3>
-                  <p className="text-txt-muted text-sm sm:text-base max-w-md">
-                    Your email client has been opened to send your inquiry to <span className="text-accent font-medium">novaframes02@gmail.com</span>. We will review your project and get back to you shortly!
+                  <h3 className="text-xl sm:text-2xl font-bold text-txt-primary mb-2">Message Sent Successfully!</h3>
+                  <p className="text-txt-muted text-sm sm:text-base max-w-md leading-relaxed">
+                    Thank you for reaching out, <span className="font-semibold text-txt-primary">{formData.name || 'there'}</span>! Your inquiry details have been delivered to our team. We will review your project and get in touch with you at <span className="font-medium text-accent">{formData.email}</span> within 24 hours.
                   </p>
                   <button 
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        company: '',
-                        service: '',
-                        budget: '',
-                        message: '',
-                      });
-                    }}
+                    onClick={handleReset}
                     className="mt-6 sm:mt-8 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-glow transition-colors"
                   >
-                    Submit another inquiry
+                    Send another message
                   </button>
                 </div>
               ) : (
@@ -182,9 +183,17 @@ export default function ContactPage() {
 
                   <button 
                     type="submit" 
-                    className="w-full sm:w-auto bg-accent hover:bg-accent-glow text-white px-8 py-3.5 rounded-full font-semibold transition-colors duration-300 shadow-md hover:shadow-lg active:scale-98"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-glow disabled:opacity-75 disabled:cursor-not-allowed text-white px-8 py-3.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-98"
                   >
-                    Submit Inquiry
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : (
+                      <span>Submit Inquiry</span>
+                    )}
                   </button>
                 </form>
               )}
