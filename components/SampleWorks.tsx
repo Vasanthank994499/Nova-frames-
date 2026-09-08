@@ -14,11 +14,23 @@ interface Reel {
   gradient: string;
   duration: string;
   engagement: string;
+  instagramUrl?: string;
 }
 
 const reels: Reel[] = [
   {
     id: 1,
+    client: 'Umbrella Homes',
+    title: 'Balcony Safety & Structural Engineering',
+    category: 'Architecture & Construction',
+    views: '150K+ Views',
+    gradient: 'from-emerald-950 via-slate-900 to-indigo-950',
+    duration: '0:42',
+    engagement: '11.3K Likes',
+    instagramUrl: 'https://www.instagram.com/reel/DcTbDleg2oq/?stkn=dW1sMjJsdHUwbnI1',
+  },
+  {
+    id: 2,
     client: 'Sree Balaji Jewellers',
     title: 'Temple Gold & Heritage Collection',
     category: 'Jewellery / Reels',
@@ -28,7 +40,7 @@ const reels: Reel[] = [
     engagement: '14.2K Likes',
   },
   {
-    id: 2,
+    id: 3,
     client: 'Sri Varagi Promoters',
     title: 'Luxury Gated Community Walkthrough',
     category: 'Real Estate / Tour',
@@ -38,7 +50,7 @@ const reels: Reel[] = [
     engagement: '8.9K Likes',
   },
   {
-    id: 3,
+    id: 4,
     client: 'Sagar Readymades',
     title: 'Festive Ethnic & Silk Trend Reel',
     category: 'Fashion & Retail',
@@ -46,16 +58,6 @@ const reels: Reel[] = [
     gradient: 'from-rose-950 via-purple-900/70 to-indigo-950',
     duration: '0:25',
     engagement: '28.4K Likes',
-  },
-  {
-    id: 4,
-    client: 'Umbrella Homes',
-    title: 'Architectural Modern Villa Showcase',
-    category: 'Architecture & Living',
-    views: '95K+ Views',
-    gradient: 'from-emerald-950 via-teal-900/60 to-indigo-950',
-    duration: '0:35',
-    engagement: '11.6K Likes',
   },
   {
     id: 5,
@@ -201,7 +203,7 @@ export default function SampleWorks() {
 
                 {/* Card Title & Client Subtitle */}
                 <div className="mt-4 pt-1 flex items-start justify-between gap-3">
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-accent transition-colors line-clamp-1">
                       {reel.title}
                     </h3>
@@ -209,6 +211,18 @@ export default function SampleWorks() {
                       Client Campaign • {reel.client}
                     </p>
                   </div>
+                  {reel.instagramUrl && (
+                    <a
+                      href={reel.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-white/5 hover:bg-accent/20 text-gray-400 hover:text-accent transition-colors shrink-0"
+                      title="Watch on Instagram"
+                      aria-label={`Watch ${reel.title} on Instagram`}
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
               </div>
             );
