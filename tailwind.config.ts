@@ -37,8 +37,8 @@ const config: Config = {
         body: ["var(--font-poppins)", "sans-serif"],
       },
       animation: {
-        "marquee": "marquee 30s linear infinite",
-        "marquee-reverse": "marquee-reverse 30s linear infinite",
+        "marquee": "marquee 45s linear infinite",
+        "marquee-reverse": "marquee-reverse 45s linear infinite",
         "float": "float 3s ease-in-out infinite",
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "spin-slow": "spin 20s linear infinite",
