@@ -35,9 +35,9 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase"
+          className="text-[17px] min-[390px]:text-[19px] min-[430px]:text-[21px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.15] tracking-tight uppercase whitespace-nowrap"
         >
-          We Build The Brands That Scale.
+          We Build The Brands That Scale
         </motion.h1>
 
         {/* Sub-Headline */}
