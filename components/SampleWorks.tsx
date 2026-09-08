@@ -141,7 +141,7 @@ export default function SampleWorks() {
         {/* Sidewards / Horizontal Scrolling Container */}
         <div
           ref={scrollRef}
-          className="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x overscroll-x-contain"
+          className="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-y overscroll-x-contain"
         >
           {reels.map((reel) => {
             const isPlaying = playingId === reel.id;

@@ -72,7 +72,7 @@ export default function TeamCarousel() {
 
         <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 mt-8 sm:mt-12 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 sm:pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x overscroll-x-contain"
+          className="flex gap-4 sm:gap-6 mt-8 sm:mt-12 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar pb-6 sm:pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-y overscroll-x-contain"
         >
           {team.map((member, index) => (
             <motion.div
