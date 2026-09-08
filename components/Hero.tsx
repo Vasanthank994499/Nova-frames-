@@ -73,14 +73,14 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="mt-8 sm:mt-12 flex items-center justify-center w-full max-w-md sm:max-w-none mx-auto"
+          className="mt-8 sm:mt-12 flex items-center justify-center w-full max-w-xs sm:max-w-none mx-auto"
         >
           <Link
             href="/contact"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider min-h-[48px]"
+            className="w-auto inline-flex items-center justify-center gap-1.5 px-6 py-2.5 sm:px-9 sm:py-4 text-xs sm:text-base font-semibold rounded-full bg-accent hover:bg-accent-glow active:scale-[0.98] text-white transition-all shadow-lg shadow-accent/30 hover:shadow-accent/50 sm:animate-float animate-glow-pulse uppercase tracking-wider"
           >
             <span>Let Us Connect</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </Link>
         </motion.div>
       </div>
