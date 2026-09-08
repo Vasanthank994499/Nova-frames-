@@ -188,8 +188,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-xs sm:text-sm font-semibold text-txt-primary">Email</p>
-                      <a href="mailto:hello@novaframes.in" className="text-txt-muted hover:text-accent text-xs sm:text-sm mt-0.5 block transition-colors break-all">
-                        hello@novaframes.in
+                      <a href="mailto:novaframes02@gmail.com" className="text-txt-muted hover:text-accent text-xs sm:text-sm mt-0.5 block transition-colors break-all">
+                        novaframes02@gmail.com
                       </a>
                     </div>
                   </div>

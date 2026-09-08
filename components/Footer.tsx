@@ -130,8 +130,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                <a href="mailto:hello@novaframes.in" className="text-sm text-txt-muted hover:text-accent transition-colors break-all">
-                  hello@novaframes.in
+                <a href="mailto:novaframes02@gmail.com" className="text-sm text-txt-muted hover:text-accent transition-colors break-all">
+                  novaframes02@gmail.com
                 </a>
               </li>
             </ul>
