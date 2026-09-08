@@ -24,7 +24,7 @@ const reels: Reel[] = [
     client: 'Umbrella Homes',
     title: 'Balcony Safety & Structural Engineering',
     category: 'Architecture & Construction',
-    views: '150K+ Views',
+    views: '248K Views',
     gradient: 'from-emerald-950 via-slate-900 to-indigo-950',
     duration: '0:42',
     engagement: '11.3K Likes',
