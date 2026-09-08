@@ -7,10 +7,39 @@ import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    service: '',
+    budget: '',
+    message: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+
+    const subject = encodeURIComponent(`Project Inquiry from ${formData.name || 'Client'} - ${formData.service || 'NovaFrames'}`);
+    const body = encodeURIComponent(
+      `Hi NovaFrames Team,\n\n` +
+      `Here are the project inquiry details:\n\n` +
+      `• Name: ${formData.name}\n` +
+      `• Email: ${formData.email}\n` +
+      `• Company: ${formData.company || 'N/A'}\n` +
+      `• Interested Service: ${formData.service || 'N/A'}\n` +
+      `• Budget Range: ${formData.budget || 'N/A'}\n\n` +
+      `• Project Details / Message:\n${formData.message}\n\n` +
+      `Best regards,\n${formData.name}`
+    );
+
+    const mailtoUrl = `mailto:novaframes02@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoUrl;
   };
 
   return (
@@ -40,15 +69,25 @@ export default function ContactPage() {
               {isSubmitted ? (
                 <div className="bg-surface-alt border border-gray-200 rounded-2xl p-8 sm:p-12 text-center h-full flex flex-col items-center justify-center">
                   <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-accent mb-4 sm:mb-6" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-txt-primary mb-2">Message Sent Successfully!</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-txt-primary mb-2">Inquiry Submitted!</h3>
                   <p className="text-txt-muted text-sm sm:text-base max-w-md">
-                    Thank you for reaching out. One of our team members will get back to you shortly.
+                    Your email client has been opened to send your inquiry to <span className="text-accent font-medium">novaframes02@gmail.com</span>. We will review your project and get back to you shortly!
                   </p>
                   <button 
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-6 sm:mt-8 px-6 py-2.5 bg-surface-muted text-txt-secondary text-sm font-medium rounded-full hover:bg-gray-200 transition-colors"
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFormData({
+                        name: '',
+                        email: '',
+                        company: '',
+                        service: '',
+                        budget: '',
+                        message: '',
+                      });
+                    }}
+                    className="mt-6 sm:mt-8 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-glow transition-colors"
                   >
-                    Send another message
+                    Submit another inquiry
                   </button>
                 </div>
               ) : (
@@ -60,6 +99,8 @@ export default function ContactPage() {
                         type="text" 
                         id="name" 
                         required
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="Your Name" 
                         className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary placeholder:text-txt-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition"
                       />
@@ -70,6 +111,8 @@ export default function ContactPage() {
                         type="email" 
                         id="email" 
                         required
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="Your Email" 
                         className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary placeholder:text-txt-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition"
                       />
@@ -81,6 +124,8 @@ export default function ContactPage() {
                     <input 
                       type="text" 
                       id="company" 
+                      value={formData.company}
+                      onChange={handleChange}
                       placeholder="Company Name (Optional)" 
                       className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary placeholder:text-txt-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition"
                     />
@@ -91,16 +136,17 @@ export default function ContactPage() {
                     <select 
                       id="service" 
                       required
-                      defaultValue=""
+                      value={formData.service}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition appearance-none"
                     >
                       <option value="" disabled className="text-txt-muted">Select a Service...</option>
-                      <option value="digital-marketing">Digital Marketing</option>
-                      <option value="brand-growth">Brand Growth & Performance</option>
-                      <option value="graphic-design">Graphic Design & Visual Identity</option>
-                      <option value="web-dev">Website Development & UI/UX</option>
-                      <option value="video-production">Video Production</option>
-                      <option value="full-service">Full-Service Package</option>
+                      <option value="Digital Marketing">Digital Marketing</option>
+                      <option value="Brand Growth & Performance">Brand Growth & Performance</option>
+                      <option value="Graphic Design & Visual Identity">Graphic Design & Visual Identity</option>
+                      <option value="Website Development & UI/UX">Website Development & UI/UX</option>
+                      <option value="Video Production & Reels">Video Production & Reels</option>
+                      <option value="Full-Service Brand Scaling">Full-Service Package</option>
                     </select>
                   </div>
 
@@ -109,14 +155,15 @@ export default function ContactPage() {
                     <select 
                       id="budget" 
                       required 
-                      defaultValue=""
+                      value={formData.budget}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition appearance-none"
                     >
                       <option value="" disabled>Select Budget Range...</option>
-                      <option value="under-25k">Under 25,000 INR</option>
-                      <option value="25k-50k">25,000 to 50,000 INR</option>
-                      <option value="50k-100k">50,000 to 1,00,000 INR</option>
-                      <option value="100k-plus">1,00,000 INR +</option>
+                      <option value="Under 25,000 INR">Under 25,000 INR</option>
+                      <option value="25,000 to 50,000 INR">25,000 to 50,000 INR</option>
+                      <option value="50,000 to 1,00,000 INR">50,000 to 1,00,000 INR</option>
+                      <option value="1,00,000 INR +">1,00,000 INR +</option>
                     </select>
                   </div>
 
@@ -126,6 +173,8 @@ export default function ContactPage() {
                       id="message" 
                       rows={4} 
                       required
+                      value={formData.message}
+                      onChange={handleChange}
                       placeholder="Tell us about your project..." 
                       className="w-full px-4 py-3 bg-surface-alt border border-gray-200 rounded-xl text-sm sm:text-base text-txt-primary placeholder:text-txt-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition resize-none"
                     ></textarea>
