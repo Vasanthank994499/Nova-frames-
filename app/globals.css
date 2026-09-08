@@ -64,3 +64,9 @@ body {
 .glass-dark {
   @apply bg-dark/80 backdrop-blur-lg border border-white/10;
 }
+
+/* 2D Touch scrolling for horizontal carousels: allows BOTH side scroll and up/down page scroll */
+.carousel-track {
+  touch-action: pan-x pan-y !important;
+  -webkit-overflow-scrolling: touch;
+}
