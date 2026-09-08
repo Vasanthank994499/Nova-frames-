@@ -81,13 +81,14 @@ const reels: Reel[] = [
   },
   {
     id: 6,
-    client: 'Kids Kingdom',
-    title: 'Festive Fun & Kids Fashion Launch',
-    category: 'Retail & Lifestyle',
-    views: '190K+ Views',
-    gradient: 'from-sky-950 via-indigo-900/70 to-pink-950',
-    duration: '0:28',
-    engagement: '22.3K Likes',
+    client: 'Onam Sadhya Feast',
+    title: 'Traditional Grand Feast & Cultural Experience',
+    category: 'Food & Hospitality',
+    views: '210K+ Views',
+    gradient: 'from-amber-950 via-emerald-900/60 to-yellow-950',
+    duration: '0:32',
+    engagement: '18.7K Likes',
+    videoSrc: '/videos/onam-sadhya.mp4',
   },
 ];
 
